@@ -41,7 +41,14 @@ const PatientRegistration: React.FC = () => {
 
   const handleSubmit = async (values: PatientFormValues, { resetForm }: FormikHelpers<PatientFormValues>) => {
     try {
-      const response = await patientsApi.addPatient(values);
+      const patientData = {
+        ...values,
+        name: `${values.firstName} ${values.lastName}`,
+        catheterDate: values.catheterInsertionDate,
+        fistulaDate: values.fistulaCreationDate,
+        phone: values.mobileNo,
+      };
+      const response = await patientsApi.addPatient(patientData);
       if (response) {
         setSuccess(true);
         setError('');
@@ -207,7 +214,8 @@ const PatientRegistration: React.FC = () => {
               <div className="text-center mt-4">
                 <button
                   type="submit"
-                  className="btn btn-primary"
+                  // className="btn btn-primary"
+                  className="btn-with-gradient mx-auto block"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? 'Registering...' : 'Register Patient'}

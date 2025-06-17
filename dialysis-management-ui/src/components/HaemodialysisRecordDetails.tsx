@@ -97,8 +97,8 @@ const HaemodialysisRecordDetails: React.FC = () => {
         </div>
         <div className="form-actions">
           <button onClick={handleAddRow} className="btn-add-row btn-with-gradient">Add Row</button>
-          <div>
-            <button onClick={handleSave} className="btn-save btn-with-gradient" style={{ marginRight: '10px' }}>Save</button>
+          <div className="action-buttons">
+            <button onClick={handleSave} className="btn-save btn-with-gradient">Save</button>
             <button onClick={handlePrint} className="btn-print-record btn-with-gradient">Print</button>
           </div>
         </div>

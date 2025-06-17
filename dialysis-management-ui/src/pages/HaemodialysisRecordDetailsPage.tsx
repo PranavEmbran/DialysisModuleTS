@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 const HaemodialysisRecordDetailsPage: React.FC = () => {
   return (
     <div className="haemodialysis-record-page-container">
-      <Header />
+      <Header sidebarCollapsed={false} toggleSidebar={() => {}} />
       <HaemodialysisRecordDetails />
       <Footer />
     </div>

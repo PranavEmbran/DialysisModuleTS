@@ -1,16 +1,5 @@
 import { API_URL } from '../config';
-import { History } from '../types';
-
-interface HistoryRecord {
-  id?: number;
-  patientId: string;
-  patientName: string;
-  date: string;
-  treatmentType: string;
-  duration: number;
-  notes?: string;
-  status: string;
-}
+import { History, HistoryRecord } from '../types';
 
 interface FetchOptions {
   method?: string;
@@ -56,7 +45,7 @@ export const historyApi = {
   async getHistoryByPatientId(patientId: string): Promise<HistoryRecord[]> {
     try {
       const allHistory = await this.getAllHistory();
-      return allHistory.filter(history => history.patientId === patientId);
+      return allHistory.filter(history => history.patientId === patientId) as HistoryRecord[];
     } catch (error) {
       console.error('Error fetching history by patient ID:', error);
       throw new Error('Failed to fetch patient history');

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 .app {
   display: flex;
   flex-direction: column;
@@ -27,7 +29,7 @@
   padding-bottom: 15px;
  } */
 
-.btn-with-gradient{
+/* .btn-with-gradient{
     background: linear-gradient(135deg, rgb(5, 130, 172), rgb(16, 85, 97));
     width: fit-content;
     border-radius: 3px;
@@ -37,7 +39,24 @@
     padding-left: 8px;
     padding-right: 8px;
     padding-top: 4px;
+color: #ffffff;
+} */
 
+.btn-with-gradient {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgb(5, 130, 172), rgb(16, 85, 97));
+  border-radius: 3px;
+  font-size: 14px;
+  height: 36px;
+  padding: 0 16px;
+  color: #ffffff !important;
+  border: none;
+  width: fit-content;
+  min-width: 80px;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 
@@ -304,6 +323,113 @@
   .modal-content {
     box-shadow: none;
     max-height: none;
+  }
+}
+
+/* Responsive styles to keep sidebar visible on all screen sizes */
+@media (max-width: 1200px) {
+  .sidebar {
+    width: 220px;
+  }
+  
+  .main-content {
+    margin-left: 220px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 200px;
+  }
+  
+  .main-content {
+    margin-left: 200px;
+    padding: 10px;
+  }
+  
+  .sidebar .nav-item {
+    padding: 8px;
+    font-size: 11px;
+  }
+  
+  .sidebar .nav-item svg {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 180px;
+  }
+  
+  .main-content {
+    margin-left: 180px;
+    padding: 8px;
+  }
+  
+  .sidebar .nav-item {
+    padding: 6px;
+    font-size: 10px;
+  }
+  
+  .sidebar .nav-item svg {
+    font-size: 16px;
+  }
+  
+  .sidebar-title {
+    font-size: 10px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    width: 160px;
+  }
+  
+  .main-content {
+    margin-left: 160px;
+    padding: 5px;
+  }
+  
+  .sidebar .nav-item {
+    padding: 5px;
+    font-size: 9px;
+  }
+  
+  .sidebar .nav-item svg {
+    font-size: 14px;
+  }
+  
+  .sidebar-title {
+    font-size: 9px;
+    padding: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 140px;
+  }
+  
+  .main-content {
+    margin-left: 140px;
+    padding: 3px;
+  }
+  
+  .sidebar .nav-item {
+    padding: 4px;
+    font-size: 8px;
+  }
+  
+  .sidebar .nav-item svg {
+    font-size: 12px;
+  }
+  
+  .sidebar-title {
+    font-size: 8px;
+    padding: 4px;
   }
 }
 

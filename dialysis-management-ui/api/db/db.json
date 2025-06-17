@@ -98,6 +98,36 @@
       "bloodGroup": "A+",
       "catheterInsertionDate": "2025-06-13",
       "fistulaCreationDate": "2025-06-13"
+    },
+    {
+      "firstName": "Athira",
+      "lastName": "NK",
+      "gender": "Female",
+      "dateOfBirth": "2000-05-05",
+      "mobileNo": "9876543215",
+      "bloodGroup": "A-",
+      "catheterInsertionDate": "2025-06-17",
+      "fistulaCreationDate": "2025-06-17",
+      "name": "Athira NK",
+      "catheterDate": "2025-06-17",
+      "fistulaDate": "2025-06-17",
+      "phone": "9876543215",
+      "id": "1750155306838"
+    },
+    {
+      "firstName": "Salahudeen",
+      "lastName": "I",
+      "gender": "Male",
+      "dateOfBirth": "2000-05-22",
+      "mobileNo": "9876543215",
+      "bloodGroup": "AB+",
+      "catheterInsertionDate": "2025-06-17",
+      "fistulaCreationDate": "2025-06-17",
+      "name": "Salahudeen I",
+      "catheterDate": "2025-06-17",
+      "fistulaDate": "2025-06-17",
+      "phone": "9876543215",
+      "id": "1750156026779"
     }
   ],
   "appointments": [
@@ -177,6 +207,16 @@
       "time": "13:56",
       "remarks": "y\n",
       "patientName": "Favas G"
+    },
+    {
+      "patientId": "1749719331795",
+      "dialysisUnit": "Unit B",
+      "technician": "Dr. Smith",
+      "admittingDoctor": "Dr. Miller",
+      "date": "2025-06-17",
+      "time": "15:56",
+      "remarks": "",
+      "id": "1750155982347"
     }
   ],
   "billing": [
@@ -219,6 +259,17 @@
       "patientName": "Vikas C",
       "totalAmount": 5000,
       "status": "PAID"
+    },
+    {
+      "patientId": "1750156026779",
+      "sessionDate": "2025-06-17",
+      "sessionDuration": 200,
+      "amount": 500,
+      "patientName": "Salahudeen I",
+      "totalAmount": 500,
+      "status": "PAID",
+      "date": "2025-06-17",
+      "id": "1750156320594"
     }
   ],
   "history": [

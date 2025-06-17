@@ -13,7 +13,6 @@ import TopNav from './components/TopNav';
 // import SideBar from './components/SideBar';
 import SideBarComp from './components/SideBarComp';
 import StartDialysis from './components/StartDialysis';
-// import Footer from './components/Footer.jsx';
 import DialysisFlowChartPage from "./pages/DialysisFlowChartPage";
 import HaemodialysisRecordDetailsPage from "./pages/HaemodialysisRecordDetailsPage";
 

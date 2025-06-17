@@ -1,16 +1,20 @@
 export interface Patient {
   id?: string | number;
   name: string;
+  firstName?: string;
+  lastName?: string;
   age?: number;
   gender?: string;
   bloodGroup: string;
   phone?: string;
+  mobileNo?: string;
   address?: string;
   emergencyContact?: string;
   medicalHistory?: string;
   registrationDate?: string;
   catheterDate: string;
   fistulaDate: string;
+  dateOfBirth?: string;
 }
 
 export interface Appointment {
@@ -49,6 +53,23 @@ export interface History {
   gender?: string;
   treatmentParameters?: any;
   nursingNotes?: string;
+}
+
+export interface HistoryRecord {
+  id?: string | number;
+  date: string;
+  patientId: string | number;
+  patientName: string;
+  parameters?: string;
+  notes?: string;
+  amount?: string;
+  age?: string;
+  gender?: string;
+  treatmentParameters?: any;
+  nursingNotes?: string;
+  treatmentType?: string;
+  duration?: string;
+  status?: string;
 }
 
 export interface StaffData {

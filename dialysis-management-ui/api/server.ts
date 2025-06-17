@@ -13,6 +13,11 @@ app.use(express.urlencoded({ extended: true }));
 // CORS configuration
 const allowedOrigins: string[] = [
   'http://localhost:3000',
+  'http://localhost:3001',
+  'http://localhost:3002',
+  'http://localhost:3003',
+  'http://localhost:3004',
+  'http://localhost:3005',
   'http://192.168.50.33:3000',
   'http://192.168.1.2:3000',
   'http://192.168.50.234:3000'
@@ -22,6 +27,11 @@ app.use(cors({
   origin: function (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
+
+    // Allow any localhost port for development
+    if (origin.startsWith('http://localhost:')) {
+      return callback(null, true);
+    }
 
     if (allowedOrigins.indexOf(origin) === -1) {
       const msg = 'The CORS policy for this site does not allow access from the specified Origin.';

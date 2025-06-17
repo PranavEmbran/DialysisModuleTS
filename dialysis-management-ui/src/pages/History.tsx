@@ -4,7 +4,7 @@ import { patientsApi } from '../api/patientsApi';
 import './History.css';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import { Patient, History } from '../types';
+import type { Patient, History } from '../types';
 
 const History: React.FC = () => {
   const [history, setHistory] = useState<History[]>([]);

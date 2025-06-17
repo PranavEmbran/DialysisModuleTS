@@ -177,7 +177,323 @@ const DialysisProcess: React.FC = () => {
               >
                 {({ isSubmitting }) => (
                   <Form>
-                    {/* ...form fields as in the original file... */}
+                    <Row className="mb-2">
+                      <Col md={6}>
+                        <div className="form-group">
+                          <label htmlFor="patientId">Patient</label>
+                          <Field as="select" id="patientId" name="patientId" className="form-control">
+                            <option value="">Select Patient</option>
+                            {patients.map(patient => (
+                              <option key={patient.id} value={patient.id}>
+                                {patient.name || `${patient.firstName || ''} ${patient.lastName || ''}`.trim()}
+                              </option>
+                            ))}
+                          </Field>
+                          <ErrorMessage name="patientId" component="div" className="text-danger" />
+                        </div>
+                      </Col>
+                      <Col md={3}>
+                        <div className="form-group">
+                          <label htmlFor="startTime">Start Time</label>
+                          <Field
+                            type="time"
+                            id="startTime"
+                            name="startTime"
+                            className="form-control"
+                          />
+                          <ErrorMessage name="startTime" component="div" className="text-danger" />
+                        </div>
+                      </Col>
+                      <Col md={3}>
+                        <div className="form-group">
+                          <label htmlFor="endTime">End Time</label>
+                          <Field
+                            type="time"
+                            id="endTime"
+                            name="endTime"
+                            className="form-control"
+                          />
+                          <ErrorMessage name="endTime" component="div" className="text-danger" />
+                        </div>
+                      </Col>
+                    </Row>
+
+                    <Row>
+                      <Col md={6}>
+                        <Card className="mb-2">
+                          <Card.Body>
+                            <h3 className="home-title">Vital Signs</h3>
+                            <Row>
+                              <Col md={6}>
+                                <h4>Pre-Dialysis</h4>
+                                <Row>
+                                  <Col md={6}>
+                                    <div className="form-group">
+                                      <label htmlFor="vitalSigns.preDialysis.bloodPressure">Blood Pressure</label>
+                                      <Field
+                                        type="text"
+                                        id="vitalSigns.preDialysis.bloodPressure"
+                                        name="vitalSigns.preDialysis.bloodPressure"
+                                        className="form-control"
+                                        placeholder="e.g., 120/80"
+                                      />
+                                      <ErrorMessage name="vitalSigns.preDialysis.bloodPressure" component="div" className="text-danger" />
+                                    </div>
+                                  </Col>
+                                  <Col md={6}>
+                                    <div className="form-group">
+                                      <label htmlFor="vitalSigns.preDialysis.heartRate">Heart Rate</label>
+                                      <Field
+                                        type="number"
+                                        id="vitalSigns.preDialysis.heartRate"
+                                        name="vitalSigns.preDialysis.heartRate"
+                                        className="form-control"
+                                      />
+                                      <ErrorMessage name="vitalSigns.preDialysis.heartRate" component="div" className="text-danger" />
+                                    </div>
+                                  </Col>
+                                </Row>
+                                <Row>
+                                  <Col md={6}>
+                                    <div className="form-group">
+                                      <label htmlFor="vitalSigns.preDialysis.temperature">Temperature</label>
+                                      <Field
+                                        type="number"
+                                        step="0.1"
+                                        id="vitalSigns.preDialysis.temperature"
+                                        name="vitalSigns.preDialysis.temperature"
+                                        className="form-control"
+                                      />
+                                      <ErrorMessage name="vitalSigns.preDialysis.temperature" component="div" className="text-danger" />
+                                    </div>
+                                  </Col>
+                                  <Col md={6}>
+                                    <div className="form-group">
+                                      <label htmlFor="vitalSigns.preDialysis.weight">Weight (kg)</label>
+                                      <Field
+                                        type="number"
+                                        step="0.1"
+                                        id="vitalSigns.preDialysis.weight"
+                                        name="vitalSigns.preDialysis.weight"
+                                        className="form-control"
+                                      />
+                                      <ErrorMessage name="vitalSigns.preDialysis.weight" component="div" className="text-danger" />
+                                    </div>
+                                  </Col>
+                                </Row>
+                              </Col>
+
+                              <Col md={6}>
+                                <h4>Post-Dialysis</h4>
+                                <Row>
+                                  <Col md={6}>
+                                    <div className="form-group">
+                                      <label htmlFor="vitalSigns.postDialysis.bloodPressure">Blood Pressure</label>
+                                      <Field
+                                        type="text"
+                                        id="vitalSigns.postDialysis.bloodPressure"
+                                        name="vitalSigns.postDialysis.bloodPressure"
+                                        className="form-control"
+                                        placeholder="e.g., 120/80"
+                                      />
+                                      <ErrorMessage name="vitalSigns.postDialysis.bloodPressure" component="div" className="text-danger" />
+                                    </div>
+                                  </Col>
+                                  <Col md={6}>
+                                    <div className="form-group">
+                                      <label htmlFor="vitalSigns.postDialysis.heartRate">Heart Rate</label>
+                                      <Field
+                                        type="number"
+                                        id="vitalSigns.postDialysis.heartRate"
+                                        name="vitalSigns.postDialysis.heartRate"
+                                        className="form-control"
+                                      />
+                                      <ErrorMessage name="vitalSigns.postDialysis.heartRate" component="div" className="text-danger" />
+                                    </div>
+                                  </Col>
+                                </Row>
+                                <Row>
+                                  <Col md={6}>
+                                    <div className="form-group">
+                                      <label htmlFor="vitalSigns.postDialysis.temperature">Temperature</label>
+                                      <Field
+                                        type="number"
+                                        step="0.1"
+                                        id="vitalSigns.postDialysis.temperature"
+                                        name="vitalSigns.postDialysis.temperature"
+                                        className="form-control"
+                                      />
+                                      <ErrorMessage name="vitalSigns.postDialysis.temperature" component="div" className="text-danger" />
+                                    </div>
+                                  </Col>
+                                  <Col md={6}>
+                                    <div className="form-group">
+                                      <label htmlFor="vitalSigns.postDialysis.weight">Weight (kg)</label>
+                                      <Field
+                                        type="number"
+                                        step="0.1"
+                                        id="vitalSigns.postDialysis.weight"
+                                        name="vitalSigns.postDialysis.weight"
+                                        className="form-control"
+                                      />
+                                      <ErrorMessage name="vitalSigns.postDialysis.weight" component="div" className="text-danger" />
+                                    </div>
+                                  </Col>
+                                </Row>
+                              </Col>
+                            </Row>
+                          </Card.Body>
+                        </Card>
+                      </Col>
+
+                      <Col md={6}>
+                        <Card className="mb-2">
+                          <Card.Body>
+                            <h3 className="home-title">Lab Results</h3>
+                            <Row>
+                              <Col md={6}>
+                                <div className="form-group">
+                                  <label htmlFor="labResults.urea">Urea</label>
+                                  <Field
+                                    type="number"
+                                    id="labResults.urea"
+                                    name="labResults.urea"
+                                    className="form-control"
+                                  />
+                                  <ErrorMessage name="labResults.urea" component="div" className="text-danger" />
+                                </div>
+                              </Col>
+                              <Col md={6}>
+                                <div className="form-group">
+                                  <label htmlFor="labResults.creatinine">Creatinine</label>
+                                  <Field
+                                    type="number"
+                                    step="0.1"
+                                    id="labResults.creatinine"
+                                    name="labResults.creatinine"
+                                    className="form-control"
+                                  />
+                                  <ErrorMessage name="labResults.creatinine" component="div" className="text-danger" />
+                                </div>
+                              </Col>
+                            </Row>
+                            <Row>
+                              <Col md={6}>
+                                <div className="form-group">
+                                  <label htmlFor="labResults.potassium">Potassium</label>
+                                  <Field
+                                    type="number"
+                                    step="0.1"
+                                    id="labResults.potassium"
+                                    name="labResults.potassium"
+                                    className="form-control"
+                                  />
+                                  <ErrorMessage name="labResults.potassium" component="div" className="text-danger" />
+                                </div>
+                              </Col>
+                              <Col md={6}>
+                                <div className="form-group">
+                                  <label htmlFor="labResults.sodium">Sodium</label>
+                                  <Field
+                                    type="number"
+                                    id="labResults.sodium"
+                                    name="labResults.sodium"
+                                    className="form-control"
+                                  />
+                                  <ErrorMessage name="labResults.sodium" component="div" className="text-danger" />
+                                </div>
+                              </Col>
+                            </Row>
+                          </Card.Body>
+                        </Card>
+
+                        <Card className="mb-2">
+                          <Card.Body>
+                            <h3 className="home-title">Treatment Parameters</h3>
+                            <Row>
+                              <Col md={6}>
+                                <div className="form-group">
+                                  <label htmlFor="treatmentParameters.dialyzer">Dialyzer</label>
+                                  <Field
+                                    type="text"
+                                    id="treatmentParameters.dialyzer"
+                                    name="treatmentParameters.dialyzer"
+                                    className="form-control"
+                                  />
+                                  <ErrorMessage name="treatmentParameters.dialyzer" component="div" className="text-danger" />
+                                </div>
+                              </Col>
+                              <Col md={6}>
+                                <div className="form-group">
+                                  <label htmlFor="treatmentParameters.bloodFlow">Blood Flow (ml/min)</label>
+                                  <Field
+                                    type="number"
+                                    id="treatmentParameters.bloodFlow"
+                                    name="treatmentParameters.bloodFlow"
+                                    className="form-control"
+                                  />
+                                  <ErrorMessage name="treatmentParameters.bloodFlow" component="div" className="text-danger" />
+                                </div>
+                              </Col>
+                            </Row>
+                            <Row>
+                              <Col md={6}>
+                                <div className="form-group">
+                                  <label htmlFor="treatmentParameters.dialysateFlow">Dialysate Flow (ml/min)</label>
+                                  <Field
+                                    type="number"
+                                    id="treatmentParameters.dialysateFlow"
+                                    name="treatmentParameters.dialysateFlow"
+                                    className="form-control"
+                                  />
+                                  <ErrorMessage name="treatmentParameters.dialysateFlow" component="div" className="text-danger" />
+                                </div>
+                              </Col>
+                              <Col md={6}>
+                                <div className="form-group">
+                                  <label htmlFor="treatmentParameters.ultrafiltration">Ultrafiltration (L)</label>
+                                  <Field
+                                    type="number"
+                                    step="0.1"
+                                    id="treatmentParameters.ultrafiltration"
+                                    name="treatmentParameters.ultrafiltration"
+                                    className="form-control"
+                                  />
+                                  <ErrorMessage name="treatmentParameters.ultrafiltration" component="div" className="text-danger" />
+                                </div>
+                              </Col>
+                            </Row>
+                          </Card.Body>
+                        </Card>
+
+                        <Card className="mb-2">
+                          <Card.Body>
+                            <div className="form-group">
+                              <label htmlFor="nursingNotes">Nursing Notes</label>
+                              <Field
+                                as="textarea"
+                                id="nursingNotes"
+                                name="nursingNotes"
+                                className="form-control"
+                                rows="2"
+                              />
+                              <ErrorMessage name="nursingNotes" component="div" className="text-danger" />
+                            </div>
+                          </Card.Body>
+                        </Card>
+                      </Col>
+                    </Row>
+
+                    <div className="text-end">
+                      <button
+                        type="submit"
+                        // className="btn btn-primary"
+                        className="btn-with-gradient"
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? 'Recording...' : 'Record Session'}
+                      </button>
+                    </div>
                   </Form>
                 )}
               </Formik>

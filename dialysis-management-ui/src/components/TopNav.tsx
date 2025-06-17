@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { FaSearch, FaBell, FaCog } from 'react-icons/fa';
+import { FaSearch, FaBell, FaCog, FaChevronDown } from 'react-icons/fa';
 import './TopNav.css';
 
 interface TopNavProps {
@@ -9,6 +9,29 @@ interface TopNavProps {
 }
 
 const TopNav: React.FC<TopNavProps> = ({ searchQuery, setSearchQuery }) => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setDropdownOpen(false);
+      }
+    }
+    if (dropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [dropdownOpen]);
+
+  const handleDropdownToggle = () => setDropdownOpen((open) => !open);
+  const handleNavClick = () => setDropdownOpen(false);
+
   return (
     <nav className="top-nav">
       <div className="nav-left">
@@ -23,8 +46,23 @@ const TopNav: React.FC<TopNavProps> = ({ searchQuery, setSearchQuery }) => {
           <li className='nav-link'><NavLink to="/billing" className={({ isActive }) => isActive ? 'active' : ''}>Billing</NavLink></li>
           <li className='nav-link'><NavLink to="/history" className={({ isActive }) => isActive ? 'active' : ''}>History</NavLink></li>
         </ul>
+        <div className="nav-more-wrapper" ref={dropdownRef}>
+          <button className="nav-more-btn" onClick={handleDropdownToggle} aria-expanded={dropdownOpen} aria-controls="nav-more-dropdown">
+            More <FaChevronDown style={{ marginLeft: 4 }} />
+          </button>
+          {dropdownOpen && (
+            <div className="nav-more-dropdown" id="nav-more-dropdown">
+              <NavLink to="/dashboard" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Dashboard</NavLink>
+              <NavLink to="/registration" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Patient Registration</NavLink>
+              <NavLink to="/schedule" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Schedule</NavLink>
+              <NavLink to="/process" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Start Dialysis</NavLink>
+              <NavLink to="/billing" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Billing</NavLink>
+              <NavLink to="/history" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>History</NavLink>
+            </div>
+          )}
+        </div>
       </div>
-      <ul className="nav-list">
+      <ul className="nav-list nav-list-responsive">
         <div className="searchBar">
           <input type="search" name="search" placeholder="Search Patient with Name or Card No. or Mobile No."
             value={searchQuery}

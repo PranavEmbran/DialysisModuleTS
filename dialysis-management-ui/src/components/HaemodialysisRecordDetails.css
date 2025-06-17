@@ -85,6 +85,19 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 1.5rem;
+  gap: 1rem;
+}
+
+.form-actions > div {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
 }
 
 .form-actions button {
@@ -95,6 +108,7 @@
   /* font-weight: 600; */
   cursor: pointer;
   transition: background-color 0.3s;
+  white-space: nowrap;
 }
 
 .btn-add-row {

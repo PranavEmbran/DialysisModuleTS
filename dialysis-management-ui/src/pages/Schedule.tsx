@@ -75,7 +75,7 @@ const Schedule: React.FC = () => {
     }
     const newSchedule = {
       ...values,
-      patientName: patient.name
+      patientName: patient.name || `${patient.firstName || ''} ${patient.lastName || ''}`.trim()
     };
     try {
       await scheduleApi.createSchedule(newSchedule);
@@ -120,7 +120,11 @@ const Schedule: React.FC = () => {
                           <label htmlFor="patientId" className="form-label">Patient</label>
                           <Field as="select" id="patientId" name="patientId" className="form-select">
                             <option value="">Select Patient</option>
-                            {patients.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
+                            {patients.map(p => (
+                              <option key={p.id} value={p.id}>
+                                {p.name || `${p.firstName || ''} ${p.lastName || ''}`.trim()}
+                              </option>
+                            ))}
                           </Field>
                           <ErrorMessage name="patientId" component="div" className="text-danger" />
                         </div>
@@ -183,7 +187,8 @@ const Schedule: React.FC = () => {
                         </div>
                       </Col>
                       <Col md={12}>
-                        <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+                        {/* <button type="submit" className="btn btn-primary" disabled={isSubmitting}> */}
+                        <button type="submit" className="btn-with-gradient" disabled={isSubmitting}>
                           {isSubmitting ? 'Scheduling...' : 'Schedule Session'}
                         </button>
                       </Col>
@@ -199,7 +204,7 @@ const Schedule: React.FC = () => {
       <Row>
         <Col>
           <Card className="shadow-sm">
-            <Card.Body>
+            <Card.Body style={{ marginLeft: "10px", marginRight: "10px", paddingBottom: "0px" }}>
               <h3 className="mb-4">Scheduled Sessions</h3>
               <div className="table-responsive">
                 <table className="table table-striped">
@@ -233,8 +238,8 @@ const Schedule: React.FC = () => {
           </Card>
         </Col>
       </Row>
-    </Container>
     <Footer />
+    </Container>
     </>
   );
 };
