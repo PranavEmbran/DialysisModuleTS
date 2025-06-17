@@ -1,0 +1,366 @@
+{
+  "patients": [
+    {
+      "id": "1749718581212",
+      "firstName": "Vignesh",
+      "lastName": "Sharma",
+      "gender": "Male",
+      "dateOfBirth": "2000-06-13",
+      "mobileNo": "9876543215",
+      "bloodGroup": "A+",
+      "catheterInsertionDate": "2025-06-11",
+      "fistulaCreationDate": "2025-06-11"
+    },
+    {
+      "id": "1749719331795",
+      "firstName": "Krishna",
+      "lastName": "Raj",
+      "gender": "Male",
+      "dateOfBirth": "1998-03-12",
+      "mobileNo": "6549873216",
+      "bloodGroup": "B-",
+      "catheterInsertionDate": "2025-06-10",
+      "fistulaCreationDate": "2025-06-10"
+    },
+    {
+      "id": "1749720798170",
+      "firstName": "Kaveri",
+      "lastName": "Amma",
+      "gender": "Female",
+      "dateOfBirth": "1977-03-11",
+      "mobileNo": "6549873216",
+      "bloodGroup": "A-",
+      "catheterInsertionDate": "2025-06-11",
+      "fistulaCreationDate": "2025-06-11"
+    },
+    {
+      "id": "1749728921175",
+      "firstName": "Shiva",
+      "lastName": "Shankar",
+      "gender": "Male",
+      "dateOfBirth": "2000-06-13",
+      "mobileNo": "1234567895",
+      "bloodGroup": "A+",
+      "catheterInsertionDate": "2025-06-10",
+      "fistulaCreationDate": "2025-06-10"
+    },
+    {
+      "id": "1749730795992",
+      "firstName": "Ganga",
+      "lastName": "Devi",
+      "gender": "Female",
+      "dateOfBirth": "1999-06-11",
+      "mobileNo": "8796541236",
+      "bloodGroup": "AB+",
+      "catheterInsertionDate": "2025-06-10",
+      "fistulaCreationDate": "2025-06-10"
+    },
+    {
+      "id": "1749734323047",
+      "firstName": "Yas",
+      "lastName": "K",
+      "gender": "Male",
+      "dateOfBirth": "1998-06-12",
+      "mobileNo": "9876543215",
+      "bloodGroup": "A+",
+      "catheterInsertionDate": "2025-06-12",
+      "fistulaCreationDate": "2025-06-12"
+    },
+    {
+      "id": "1749789888843",
+      "firstName": "Vikas",
+      "lastName": "C",
+      "gender": "Male",
+      "dateOfBirth": "1986-12-29",
+      "mobileNo": "9876543215",
+      "bloodGroup": "A+",
+      "catheterInsertionDate": "2025-06-13",
+      "fistulaCreationDate": "2025-06-13"
+    },
+    {
+      "id": "1749792258608",
+      "firstName": "Nithin",
+      "lastName": "R",
+      "gender": "Male",
+      "dateOfBirth": "2000-02-01",
+      "mobileNo": "6549873216",
+      "bloodGroup": "A+",
+      "catheterInsertionDate": "2025-06-13",
+      "fistulaCreationDate": "2025-06-13"
+    },
+    {
+      "id": "1749803179654",
+      "firstName": "Favas",
+      "lastName": "G",
+      "gender": "Male",
+      "dateOfBirth": "2000-05-06",
+      "mobileNo": "6549873216",
+      "bloodGroup": "A+",
+      "catheterInsertionDate": "2025-06-13",
+      "fistulaCreationDate": "2025-06-13"
+    }
+  ],
+  "appointments": [
+    {
+      "id": "1749720819841",
+      "patientId": "1749720798170",
+      "dialysisUnit": "Unit A",
+      "technician": "Dr. Smith",
+      "admittingDoctor": "Dr. Davis",
+      "date": "2025-06-11",
+      "time": "15:03",
+      "remarks": "Test",
+      "patientName": "Kaveri Amma"
+    },
+    {
+      "id": "1749721181752",
+      "patientId": "1749719331795",
+      "dialysisUnit": "Unit A",
+      "technician": "Dr. Smith",
+      "admittingDoctor": "Dr. Johnson",
+      "date": "2025-06-11",
+      "time": "15:09",
+      "remarks": "t",
+      "patientName": "Krishna Raj"
+    },
+    {
+      "id": "1749728953828",
+      "patientId": "1749728921175",
+      "dialysisUnit": "Unit A",
+      "technician": "Dr. Smith",
+      "admittingDoctor": "Dr. Davis",
+      "date": "2025-06-11",
+      "time": "17:19",
+      "remarks": "Test",
+      "patientName": "Shiva Shankar"
+    },
+    {
+      "id": "1749730277645",
+      "patientId": "1749719331795",
+      "dialysisUnit": "Unit A",
+      "technician": "Dr. Brown",
+      "admittingDoctor": "Dr. Davis",
+      "date": "2025-06-11",
+      "time": "19:41",
+      "remarks": "Test",
+      "patientName": "Krishna Raj"
+    },
+    {
+      "id": "1749730840764",
+      "patientId": "1749730795992",
+      "dialysisUnit": "Unit C",
+      "technician": "Dr. Wilson",
+      "admittingDoctor": "Dr. Miller",
+      "date": "2025-06-11",
+      "time": "18:50",
+      "remarks": "Test",
+      "patientName": "Ganga Devi"
+    },
+    {
+      "id": "1749789917215",
+      "patientId": "1749789888843",
+      "dialysisUnit": "Unit A",
+      "technician": "Dr. Brown",
+      "admittingDoctor": "Dr. Davis",
+      "date": "2025-06-13",
+      "time": "10:15",
+      "remarks": "Test",
+      "patientName": "Vikas C"
+    },
+    {
+      "id": "1749803204578",
+      "patientId": "1749803179654",
+      "dialysisUnit": "Unit A",
+      "technician": "Dr. Brown",
+      "admittingDoctor": "Dr. Miller",
+      "date": "2025-06-13",
+      "time": "13:56",
+      "remarks": "y\n",
+      "patientName": "Favas G"
+    }
+  ],
+  "billing": [
+    {
+      "id": "1749720894696",
+      "patientId": "1749720798170",
+      "sessionDate": "2025-06-11",
+      "sessionDuration": 180,
+      "amount": 100,
+      "patientName": "Kaveri Amma",
+      "totalAmount": 100,
+      "status": "PAID"
+    },
+    {
+      "id": "1749730629760",
+      "patientId": "1749718581212",
+      "sessionDate": "2025-06-19",
+      "sessionDuration": 180,
+      "amount": 100,
+      "patientName": "Vignesh Sharma",
+      "totalAmount": 100,
+      "status": "PAID"
+    },
+    {
+      "id": "1749730952986",
+      "patientId": "1749730795992",
+      "sessionDate": "2025-06-11",
+      "sessionDuration": 180,
+      "amount": 2000,
+      "patientName": "Ganga Devi",
+      "totalAmount": 2000,
+      "status": "PAID"
+    },
+    {
+      "id": "1749789981172",
+      "patientId": "1749789888843",
+      "sessionDate": "2025-06-13",
+      "sessionDuration": 180,
+      "amount": 5000,
+      "patientName": "Vikas C",
+      "totalAmount": 5000,
+      "status": "PAID"
+    }
+  ],
+  "history": [
+    {
+      "id": "1749723030045",
+      "patientId": "1749718581212",
+      "startTime": "15:40",
+      "endTime": "18:40",
+      "vitalSigns": {
+        "preDialysis": {
+          "bloodPressure": "110",
+          "heartRate": 73,
+          "temperature": 37,
+          "weight": 67
+        },
+        "postDialysis": {
+          "bloodPressure": "110",
+          "heartRate": 73,
+          "temperature": 37,
+          "weight": 76
+        }
+      },
+      "labResults": {
+        "urea": 56,
+        "creatinine": 67,
+        "potassium": 767,
+        "sodium": 67
+      },
+      "treatmentParameters": {
+        "dialyzer": "67",
+        "bloodFlow": 67,
+        "dialysateFlow": 67,
+        "ultrafiltration": 67
+      },
+      "nursingNotes": "aa",
+      "patientName": "Vignesh Sharma",
+      "date": "2025-06-12"
+    },
+    {
+      "id": "1749730919895",
+      "patientId": "1749730795992",
+      "startTime": "18:51",
+      "endTime": "20:52",
+      "vitalSigns": {
+        "preDialysis": {
+          "bloodPressure": "110",
+          "heartRate": 72,
+          "temperature": 37,
+          "weight": 65
+        },
+        "postDialysis": {
+          "bloodPressure": "110",
+          "heartRate": 72,
+          "temperature": 37,
+          "weight": 65
+        }
+      },
+      "labResults": {
+        "urea": 65,
+        "creatinine": 45,
+        "potassium": 45,
+        "sodium": 65
+      },
+      "treatmentParameters": {
+        "dialyzer": "65",
+        "bloodFlow": 45,
+        "dialysateFlow": 45,
+        "ultrafiltration": 65
+      },
+      "nursingNotes": "Note test",
+      "patientName": "Ganga Devi",
+      "date": "2025-06-12"
+    },
+    {
+      "id": "1749789957707",
+      "patientId": "1749789888843",
+      "startTime": "10:15",
+      "endTime": "13:15",
+      "vitalSigns": {
+        "preDialysis": {
+          "bloodPressure": "110",
+          "heartRate": 72,
+          "temperature": 37,
+          "weight": 65
+        },
+        "postDialysis": {
+          "bloodPressure": "110",
+          "heartRate": 72,
+          "temperature": 37,
+          "weight": 65
+        }
+      },
+      "labResults": {
+        "urea": 87,
+        "creatinine": 87,
+        "potassium": 67,
+        "sodium": 67
+      },
+      "treatmentParameters": {
+        "dialyzer": "56",
+        "bloodFlow": 785,
+        "dialysateFlow": 65,
+        "ultrafiltration": 43
+      },
+      "nursingNotes": "Testing",
+      "patientName": "Vikas C",
+      "date": "2025-06-13"
+    },
+    {
+      "id": "1749803244560",
+      "patientId": "1749803179654",
+      "startTime": "13:57",
+      "endTime": "13:57",
+      "vitalSigns": {
+        "preDialysis": {
+          "bloodPressure": "110",
+          "heartRate": 72,
+          "temperature": 37,
+          "weight": 65
+        },
+        "postDialysis": {
+          "bloodPressure": "90",
+          "heartRate": 72,
+          "temperature": 37,
+          "weight": 65
+        }
+      },
+      "labResults": {
+        "urea": 57,
+        "creatinine": 57,
+        "potassium": 45,
+        "sodium": 86
+      },
+      "treatmentParameters": {
+        "dialyzer": "54",
+        "bloodFlow": 68,
+        "dialysateFlow": 87,
+        "ultrafiltration": 45
+      },
+      "nursingNotes": "p",
+      "patientName": "Favas G",
+      "date": "2025-06-13"
+    }
+  ]
+}
