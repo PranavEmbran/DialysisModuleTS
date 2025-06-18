@@ -18,12 +18,16 @@ const SideBar: React.FC<SideBarCompProps> = ({ collapsed = false }) => {
             {!collapsed && (
                 <div className="sidebar-header-section">
                     {/* <div className="sidebar-header-role-top">System Admin</div> */}
-                    <div className="sidebar-header-img-wrap">
-                        <img src="/HoDo-LOGO-BLUE150.png" alt="Profile" className="sidebar-header-img" />
+                    <div className="sidebar-header-top-wrap">
+                        <div className="sidebar-header-img-wrap">
+                            <img src="/HoDo-LOGO-BLUE150.png" alt="Profile" className="sidebar-header-img" />
+                        </div>
+                        <div className="sidebar-header-text-wrap">
+                            <div className="sidebar-header-hospital">HODO Hospital,<br />Kazhakkoottam</div>
+                            <div className="sidebar-header-role2">System Admin</div>
+                            <div className="sidebar-header-location">@Kottayam <span className="sidebar-header-date">{formattedDate}</span></div>
+                        </div>
                     </div>
-                    <div className="sidebar-header-hospital">HODO Hospital,<br />Kazhakkoottam</div>
-                    <div className="sidebar-header-role2">System Admin</div>
-                    <div className="sidebar-header-location">@Kottayam <span className="sidebar-header-date">{formattedDate}</span></div>
                     <input
                         type="text"
                         className="sidebar-header-search"
