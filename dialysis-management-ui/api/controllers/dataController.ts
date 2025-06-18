@@ -31,10 +31,63 @@ interface History {
   [key: string]: any;
 }
 
+interface DialysisFlowChart {
+  id: string;
+  patientId: string;
+  patientName: string;
+  date: string;
+  hemodialysisNIO: string;
+  bloodAccess: string;
+  hdStartingTime: string;
+  hdClosingTime: string;
+  durationHours: string;
+  bloodFlowRate: string;
+  injHeparinPrime: string;
+  injHeparinBolus: string;
+  startingWithSaline: boolean;
+  closingWithAir: boolean;
+  closingWithSaline: boolean;
+  bloodTransfusion: boolean;
+  bloodTransfusionComment: string;
+  bpBeforeDialysis: string;
+  bpAfterDialysis: string;
+  bpDuringDialysis: string;
+  weightPreDialysis: string;
+  weightPostDialysis: string;
+  weightLoss: string;
+  dryWeight: string;
+  weightGain: string;
+  dialysisMonitorNameFO: string;
+  dialysisNameSize: string;
+  dialysisNumberOfRefuse: string;
+  bloodTubeNumberOfRefuse: string;
+  dialysisFlowRate: string;
+  bathacetete: string;
+  bathBicarb: string;
+  naConductivity: string;
+  profilesNo: string;
+  equipmentsComplaints: string;
+  patientsComplaints: string;
+  spo2: string;
+  fever: boolean;
+  rigor: boolean;
+  hypertension: boolean;
+  hypoglycemia: boolean;
+  deptInChargeSign: string;
+}
+
 interface StaffData {
   technicians: string[];
   doctors: string[];
   units: string[];
+}
+
+interface HaemodialysisRecord {
+  id: string;
+  patientId: string;
+  patientName: string;
+  date: string;
+  rows: any[];
 }
 
 interface Database {
@@ -42,6 +95,8 @@ interface Database {
   appointments: Appointment[];
   billing: Billing[];
   history: History[];
+  dialysisFlowCharts: DialysisFlowChart[];
+  haemodialysisRecords: HaemodialysisRecord[];
 }
 
 function readDB(): Database {
@@ -322,13 +377,11 @@ export const deleteHistory = (req: Request, res: Response): void => {
 export const getStaff = (req: Request, res: Response): void => {
   try {
     console.log('Fetching staff data...');
-    // Return mock staff data for now
     const staffData: StaffData = {
-      technicians: ['Dr. Smith', 'Dr. Brown', 'Dr. Wilson'],
-      doctors: ['Dr. Davis', 'Dr. Johnson', 'Dr. Miller'],
+      technicians: ['John Doe', 'Jane Smith', 'Mike Johnson'],
+      doctors: ['Dr. Brown', 'Dr. Wilson', 'Dr. Davis'],
       units: ['Unit A', 'Unit B', 'Unit C']
     };
-    console.log('Returning staff data:', staffData);
     res.json(staffData);
   } catch (error) {
     console.error('Error in getStaff:', error);
@@ -336,5 +389,86 @@ export const getStaff = (req: Request, res: Response): void => {
       message: 'Failed to get staff data',
       error: error instanceof Error ? error.message : 'Unknown error'
     });
+  }
+};
+
+// Dialysis Flow Charts
+export const getDialysisFlowCharts = (req: Request, res: Response): void => {
+  try {
+    console.log('Fetching all dialysis flow charts...');
+    const db = readDB();
+    const dialysisFlowCharts = db.dialysisFlowCharts || [];
+    console.log(`Found ${dialysisFlowCharts.length} dialysis flow charts`);
+    res.json(dialysisFlowCharts);
+  } catch (error) {
+    console.error('Error in getDialysisFlowCharts:', error);
+    res.status(500).json({ 
+      message: 'Failed to get dialysis flow charts',
+      error: error instanceof Error ? error.message : 'Unknown error'
+    });
+  }
+};
+
+export const addDialysisFlowChart = (req: Request, res: Response): void => {
+  try {
+    console.log('Adding new dialysis flow chart:', req.body);
+    const db = readDB();
+    const newDialysisFlowChart: DialysisFlowChart = { 
+      id: Date.now().toString(), 
+      ...req.body 
+    };
+    db.dialysisFlowCharts.push(newDialysisFlowChart);
+    writeDB(db);
+    console.log('Successfully added new dialysis flow chart:', newDialysisFlowChart);
+    res.status(201).json(newDialysisFlowChart);
+  } catch (error) {
+    console.error('Error in addDialysisFlowChart:', error);
+    res.status(500).json({ 
+      message: 'Failed to add dialysis flow chart',
+      error: error instanceof Error ? error.message : 'Unknown error'
+    });
+  }
+};
+
+export const deleteDialysisFlowChart = (req: Request, res: Response): void => {
+  try {
+    const dialysisFlowChartId = req.params.id;
+    console.log('Deleting dialysis flow chart with ID:', dialysisFlowChartId);
+    const db = readDB();
+    db.dialysisFlowCharts = db.dialysisFlowCharts.filter(d => d.id !== dialysisFlowChartId);
+    writeDB(db);
+    console.log('Successfully deleted dialysis flow chart:', dialysisFlowChartId);
+    res.status(204).end();
+  } catch (error) {
+    console.error('Error in deleteDialysisFlowChart:', error);
+    res.status(500).json({ 
+      message: 'Failed to delete dialysis flow chart',
+      error: error instanceof Error ? error.message : 'Unknown error'
+    });
+  }
+};
+
+// Haemodialysis Records
+export const getHaemodialysisRecords = (req: Request, res: Response): void => {
+  try {
+    const db = readDB();
+    res.json(db.haemodialysisRecords || []);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch haemodialysis records' });
+  }
+};
+
+export const addHaemodialysisRecord = (req: Request, res: Response): void => {
+  try {
+    const db = readDB();
+    const newRecord: HaemodialysisRecord = {
+      id: Date.now().toString(),
+      ...req.body
+    };
+    db.haemodialysisRecords.push(newRecord);
+    writeDB(db);
+    res.status(201).json(newRecord);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to add haemodialysis record' });
   }
 }; 

@@ -41,7 +41,11 @@ const Header: React.FC<HeaderProps> = ({ sidebarCollapsed, toggleSidebar }) => {
                 onClick={toggleSidebar}
                 title={sidebarCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
             >
-                {sidebarCollapsed ? <ChevronRightIcon size={20} /> : <ChevronLeftIcon size={20} />}
+                <img
+                    src="/lefthand.png"
+                    alt="Toggle Sidebar"
+                    style={{ width: 24, height: 24, transform: sidebarCollapsed ? "scaleX(-1)" : "none" }}
+                />
             </button>
             <h1>Dialysis Management</h1>
             <div className="header-div ">

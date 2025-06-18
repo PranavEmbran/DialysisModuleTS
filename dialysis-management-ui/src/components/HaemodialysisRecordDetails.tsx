@@ -1,4 +1,7 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
+import { patientsApi } from '../api/patientsApi';
+import { Patient } from '../types';
+import { haemodialysisRecordApi } from '../api/haemodialysisRecordApi';
 import './HaemodialysisRecordDetails.css';
 
 interface Row {
@@ -33,6 +36,22 @@ const HaemodialysisRecordDetails: React.FC = () => {
   };
 
   const [rows, setRows] = useState<Row[]>([createNewRow()]);
+  const [patients, setPatients] = useState<Patient[]>([]);
+  const [selectedPatientId, setSelectedPatientId] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>('');
+  const [success, setSuccess] = useState<string>('');
+
+  useEffect(() => {
+    patientsApi.getAllPatients()
+      .then(setPatients)
+      .catch(() => setError('Failed to fetch patients'))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const handlePatientChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSelectedPatientId(e.target.value);
+  };
 
   const handleAddRow = () => {
     setRows([...rows, createNewRow()]);
@@ -48,9 +67,31 @@ const HaemodialysisRecordDetails: React.FC = () => {
     setRows(updatedRows);
   };
 
-  const handleSave = () => {
-    console.log('Saving data:', rows);
-    // Implement save logic here
+  const handleSave = async () => {
+    setError('');
+    setSuccess('');
+    if (!selectedPatientId) {
+      setError('Please select a patient.');
+      return;
+    }
+    const patient = patients.find(p => String(p.id) === String(selectedPatientId));
+    if (!patient) {
+      setError('Invalid patient selected.');
+      return;
+    }
+    const record = {
+      patientId: selectedPatientId,
+      patientName: (patient.firstName || patient.name) + (patient.lastName ? ' ' + patient.lastName : ''),
+      date: new Date().toISOString().split('T')[0],
+      rows: rows,
+    };
+    try {
+      await haemodialysisRecordApi.addRecord(record);
+      setSuccess('Record saved successfully!');
+      setTimeout(() => setSuccess(''), 3000);
+    } catch (err) {
+      setError('Failed to save record. Please try again.');
+    }
   };
 
   const handlePrint = () => {
@@ -63,6 +104,45 @@ const HaemodialysisRecordDetails: React.FC = () => {
         <h2 className="haemodialysis-record-title">Haemodialysis Record Details</h2>
       </div>
       <div className="haemodialysis-record-form-container">
+        {/* Patient Dropdown */}
+        <div className="form-field" style={{ marginBottom: '1.5rem' }}>
+          <label htmlFor="patient-select"><strong>Select Patient</strong></label>
+          <select
+            id="patient-select"
+            value={selectedPatientId}
+            onChange={handlePatientChange}
+            disabled={loading}
+            style={{ marginLeft: '1rem', minWidth: '200px' }}
+          >
+            <option value="">-- Select Patient --</option>
+            {patients.map((p) => (
+              <option key={p.id} value={p.id}>
+                {(p.firstName || p.name) + (p.lastName ? ' ' + p.lastName : '')}
+              </option>
+            ))}
+          </select>
+        </div>
+        {/* Selected Patient Info */}
+        {selectedPatientId && (
+          <div className="selected-patient-info" style={{ marginBottom: '1.5rem', background: '#f8f9fa', padding: '1rem', borderRadius: '6px' }}>
+            <h4 style={{ margin: 0, marginBottom: '0.5rem' }}>Selected Patient Information</h4>
+            {(() => {
+              const selectedPatient = patients.find(p => String(p.id) === String(selectedPatientId));
+              if (!selectedPatient) return null;
+              return (
+                <div className="patient-details-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
+                  <div><strong>Name:</strong> {(selectedPatient.firstName || selectedPatient.name) + (selectedPatient.lastName ? ' ' + selectedPatient.lastName : '')}</div>
+                  <div><strong>Gender:</strong> {selectedPatient.gender || 'N/A'}</div>
+                  <div><strong>Blood Group:</strong> {selectedPatient.bloodGroup || 'N/A'}</div>
+                  <div><strong>Mobile:</strong> {selectedPatient.mobileNo || selectedPatient.phone || 'N/A'}</div>
+                  <div><strong>Date of Birth:</strong> {selectedPatient.dateOfBirth || 'N/A'}</div>
+                  <div><strong>Catheter Date:</strong> {selectedPatient.catheterDate || selectedPatient.catheterInsertionDate || 'N/A'}</div>
+                  <div><strong>Fistula Date:</strong> {selectedPatient.fistulaDate || selectedPatient.fistulaCreationDate || 'N/A'}</div>
+                </div>
+              );
+            })()}
+          </div>
+        )}
         <div className="record-table-wrapper">
           <table className="record-table">
             <thead>
@@ -98,11 +178,13 @@ const HaemodialysisRecordDetails: React.FC = () => {
         <div className="form-actions">
           <button onClick={handleAddRow} className="btn-add-row btn-with-gradient">Add Row</button>
           <div className="action-buttons">
-            <button onClick={handleSave} className="btn-save btn-with-gradient">Save</button>
+            <button onClick={handleSave} className="btn-save btn-with-gradient" disabled={!selectedPatientId}>Save</button>
             <button onClick={handlePrint} className="btn-print-record btn-with-gradient">Print</button>
           </div>
         </div>
       </div>
+      {success && <div className="success-message">{success}</div>}
+      {error && <div className="error-message">{error}</div>}
     </div>
   );
 };

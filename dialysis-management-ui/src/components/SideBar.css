@@ -109,3 +109,87 @@
     color: black;
     border-right: 4px solid #0d92ae;
 }
+
+.sidebar-header-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #061320;
+    border-bottom: 1px solid #222e3c;
+    margin-bottom: 10px;
+    padding: 18px 0 10px 0;
+    padding-top: 70px;
+}
+.sidebar-header-img-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 6px;
+}
+.sidebar-header-img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2.5px solid #80def7;
+    background: #fff;
+    box-shadow: 0 2px 8px 0 #0002;
+}
+.sidebar-header-role-top {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 2px;
+    margin-top: 0;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+.sidebar-header-hospital {
+    /* color: #00c6e6; */
+    color: #038ba4;
+    font-size: 15px;
+    /* font-weight: 700; */
+    text-align: center;
+    margin-bottom: 2px;
+    line-height: 1.15;
+    letter-spacing: 0.2px;
+}
+.sidebar-header-role2 {
+    color: #038ba4;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 2px;
+    text-align: center;
+    margin-top: 0px;
+}
+.sidebar-header-location {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    text-align: center;
+}
+.sidebar-header-date {
+    color: #fff;
+    font-weight: bold;
+    font-size: 12px;
+    margin-left: 2px;
+}
+.sidebar-header-search {
+    width: 92%;
+    padding: 4px 8px;
+    border-radius: 5px;
+    border: 1.5px solid #80def7;
+    background: #061320;
+    color: #fff;
+    font-size: 12px;
+    margin-top: 7px;
+    outline: none;
+    text-align: center;
+    margin-bottom: 2px;
+}
+.sidebar-header-search::placeholder {
+    color: #ffffff;
+    opacity: 1;
+    font-size: 11px;
+}

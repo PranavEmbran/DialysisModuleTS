@@ -14,6 +14,8 @@ export interface Patient {
   registrationDate?: string;
   catheterDate: string;
   fistulaDate: string;
+  catheterInsertionDate?: string;
+  fistulaCreationDate?: string;
   dateOfBirth?: string;
 }
 
@@ -80,6 +82,7 @@ export interface StaffData {
 
 export interface ScheduleEntry {
   id?: string | number;
+  patientId?: string | number;
   patientName: string;
   date: string;
   time: string;

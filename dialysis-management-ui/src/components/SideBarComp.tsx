@@ -7,11 +7,33 @@ interface SideBarCompProps {
   collapsed?: boolean;
 }
 
+const today = new Date();
+const formattedDate = today.toLocaleDateString('en-GB').replace(/\//g, '/');
+// const formattedDate = today.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+
+
 const SideBar: React.FC<SideBarCompProps> = ({ collapsed = false }) => {
     return (
         <div className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
+            {!collapsed && (
+                <div className="sidebar-header-section">
+                    {/* <div className="sidebar-header-role-top">System Admin</div> */}
+                    <div className="sidebar-header-img-wrap">
+                        <img src="/HoDo-LOGO-BLUE150.png" alt="Profile" className="sidebar-header-img" />
+                    </div>
+                    <div className="sidebar-header-hospital">HODO Hospital,<br />Kazhakkoottam</div>
+                    <div className="sidebar-header-role2">System Admin</div>
+                    <div className="sidebar-header-location">@Kottayam <span className="sidebar-header-date">{formattedDate}</span></div>
+                    <input
+                        type="text"
+                        className="sidebar-header-search"
+                        placeholder="Search Menu - CTRL + M"
+                        tabIndex={-1}
+                    />
+                </div>
+            )}
             <nav>
-                <ul><br /><br /><br />
+                <ul>
                     <li>
                         {!collapsed && <li className="sidebar-title">Dialysis Management</li>}
                     </li>

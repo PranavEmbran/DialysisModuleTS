@@ -14,7 +14,7 @@ const readDatabase = () => {
     return JSON.parse(data);
   } catch (error) {
     console.error('Error reading database:', error);
-    return { patients: [], appointments: [], billing: [], history: [] };
+    return { patients: [], appointments: [], billing: [], history: [], dialysisFlowCharts: [], haemodialysisRecords: [] };
   }
 };
 
@@ -229,6 +229,79 @@ router.get('/staff', (req: Request, res: Response) => {
   } catch (error) {
     console.error('Error fetching staff:', error);
     res.status(500).json({ error: 'Failed to fetch staff' });
+  }
+});
+
+// Dialysis Flow Chart endpoints
+router.get('/dialysis-flow-charts', (req: Request, res: Response) => {
+  try {
+    const db = readDatabase();
+    res.json(db.dialysisFlowCharts || []);
+  } catch (error) {
+    console.error('Error fetching dialysis flow charts:', error);
+    res.status(500).json({ error: 'Failed to fetch dialysis flow charts' });
+  }
+});
+
+router.post('/dialysis-flow-charts', (req: Request, res: Response) => {
+  try {
+    const db = readDatabase();
+    const dialysisFlowChart = {
+      ...req.body,
+      id: Date.now().toString()
+    };
+    
+    db.dialysisFlowCharts.push(dialysisFlowChart);
+    writeDatabase(db);
+    
+    res.status(201).json(dialysisFlowChart);
+  } catch (error) {
+    console.error('Error adding dialysis flow chart:', error);
+    res.status(500).json({ error: 'Failed to add dialysis flow chart' });
+  }
+});
+
+router.delete('/dialysis-flow-charts/:id', (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const db = readDatabase();
+    
+    const index = db.dialysisFlowCharts.findIndex((d: any) => d.id === id);
+    if (index !== -1) {
+      db.dialysisFlowCharts.splice(index, 1);
+      writeDatabase(db);
+      res.json({ message: `Dialysis flow chart ${id} deleted successfully` });
+    } else {
+      res.status(404).json({ error: 'Dialysis flow chart not found' });
+    }
+  } catch (error) {
+    console.error('Error deleting dialysis flow chart:', error);
+    res.status(500).json({ error: 'Failed to delete dialysis flow chart' });
+  }
+});
+
+// Haemodialysis Records endpoints
+router.get('/haemodialysis-records', (req: Request, res: Response) => {
+  try {
+    const db = readDatabase();
+    res.json(db.haemodialysisRecords || []);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch haemodialysis records' });
+  }
+});
+
+router.post('/haemodialysis-records', (req: Request, res: Response) => {
+  try {
+    const db = readDatabase();
+    const newRecord = {
+      ...req.body,
+      id: Date.now().toString()
+    };
+    db.haemodialysisRecords.push(newRecord);
+    writeDatabase(db);
+    res.status(201).json(newRecord);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to add haemodialysis record' });
   }
 });
 

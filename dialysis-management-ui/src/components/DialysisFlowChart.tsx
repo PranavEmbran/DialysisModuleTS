@@ -1,7 +1,13 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
+import { patientsApi } from '../api/patientsApi';
+import { dialysisFlowChartApi } from '../api/dialysisFlowChartApi';
+import { Patient } from '../types';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 import './DialysisFlowChart.css';
 
 interface DialysisFlowChartForm {
+  patientId: string;
   date: string;
   hemodialysisNIO: string;
   bloodAccess: string;
@@ -44,7 +50,14 @@ interface DialysisFlowChartForm {
 }
 
 const DialysisFlowChart: React.FC = () => {
+  const [patients, setPatients] = useState<Patient[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>('');
+  const [success, setSuccess] = useState<string>('');
+  const [submitting, setSubmitting] = useState<boolean>(false);
+
   const [formData, setFormData] = useState<DialysisFlowChartForm>({
+    patientId: '',
     date: '',
     hemodialysisNIO: '',
     bloodAccess: '',
@@ -86,6 +99,23 @@ const DialysisFlowChart: React.FC = () => {
     deptInChargeSign: '',
   });
 
+  useEffect(() => {
+    const fetchPatients = async () => {
+      try {
+        setLoading(true);
+        setError('');
+        const patientsData = await patientsApi.getAllPatients();
+        setPatients(patientsData);
+      } catch (err) {
+        console.error('Error fetching patients:', err);
+        setError('Failed to load patients. Please try again.');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPatients();
+  }, []);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
@@ -95,19 +125,223 @@ const DialysisFlowChart: React.FC = () => {
     }));
   };
 
+  const getSelectedPatient = () => {
+    return patients.find(patient => patient.id === formData.patientId);
+  };
+
+  const selectedPatient = getSelectedPatient();
+
   const handlePrint = () => {
     window.print();
   };
 
   const handleExportExcel = () => {
-    // Logic to export to Excel
-    console.log('Exporting to Excel:', formData);
+    try {
+      const selectedPatient = getSelectedPatient();
+      
+      // Prepare data for Excel export
+      const excelData = [
+        {
+          'Patient Name': selectedPatient ? 
+            (selectedPatient.firstName || selectedPatient.name) + 
+            (selectedPatient.lastName ? ' ' + selectedPatient.lastName : '') : 'N/A',
+          'Date': formData.date || 'N/A',
+          'Hemodialysis NIO': formData.hemodialysisNIO || 'N/A',
+          'Blood Access': formData.bloodAccess || 'N/A',
+          'HD Starting Time': formData.hdStartingTime || 'N/A',
+          'HD Closing Time': formData.hdClosingTime || 'N/A',
+          'Duration Hours': formData.durationHours || 'N/A',
+          'Blood Flow Rate (ml/min)': formData.bloodFlowRate || 'N/A',
+          'Inj Heparin Prime (units)': formData.injHeparinPrime || 'N/A',
+          'Inj Heparin Bolus (units)': formData.injHeparinBolus || 'N/A',
+          'Starting with Saline': formData.startingWithSaline ? 'Yes' : 'No',
+          'Closing with Air': formData.closingWithAir ? 'Yes' : 'No',
+          'Closing with Saline': formData.closingWithSaline ? 'Yes' : 'No',
+          'Blood Transfusion': formData.bloodTransfusion ? 'Yes' : 'No',
+          'Blood Transfusion Comment': formData.bloodTransfusionComment || 'N/A',
+          'B.P. Before Dialysis': formData.bpBeforeDialysis || 'N/A',
+          'B.P. After Dialysis': formData.bpAfterDialysis || 'N/A',
+          'B.P. During Dialysis': formData.bpDuringDialysis || 'N/A',
+          'Weight Pre Dialysis (kg)': formData.weightPreDialysis || 'N/A',
+          'Weight Post Dialysis (kg)': formData.weightPostDialysis || 'N/A',
+          'Weight Loss (kg)': formData.weightLoss || 'N/A',
+          'Dry Weight (kg)': formData.dryWeight || 'N/A',
+          'Weight Gain (kg)': formData.weightGain || 'N/A',
+          'SPO2 (%)': formData.spo2 || 'N/A',
+          'Dialysis Monitor Name FO': formData.dialysisMonitorNameFO || 'N/A',
+          'Dialysis Name / Size': formData.dialysisNameSize || 'N/A',
+          'Dialysis Number of Refuse': formData.dialysisNumberOfRefuse || 'N/A',
+          'Blood Tube Number of Refuse': formData.bloodTubeNumberOfRefuse || 'N/A',
+          'Dialysis Flow Rate': formData.dialysisFlowRate || 'N/A',
+          'Bathacetete': formData.bathacetete || 'N/A',
+          'Bath Bicarb': formData.bathBicarb || 'N/A',
+          'Na / Conductivity': formData.naConductivity || 'N/A',
+          'Profiles No': formData.profilesNo || 'N/A',
+          'Equipments Complaints': formData.equipmentsComplaints || 'N/A',
+          'Patients Complaints': formData.patientsComplaints || 'N/A',
+          'Fever': formData.fever ? 'Yes' : 'No',
+          'Rigor': formData.rigor ? 'Yes' : 'No',
+          'Hypertension': formData.hypertension ? 'Yes' : 'No',
+          'Hypoglycemia': formData.hypoglycemia ? 'Yes' : 'No',
+          'Dept In-Charge Sign': formData.deptInChargeSign || 'N/A'
+        }
+      ];
+
+      // Create workbook and worksheet
+      const workbook = XLSX.utils.book_new();
+      const worksheet = XLSX.utils.json_to_sheet(excelData);
+
+      // Set column widths
+      const columnWidths = [
+        { wch: 20 }, // Patient Name
+        { wch: 12 }, // Date
+        { wch: 15 }, // Hemodialysis NIO
+        { wch: 15 }, // Blood Access
+        { wch: 15 }, // HD Starting Time
+        { wch: 15 }, // HD Closing Time
+        { wch: 15 }, // Duration Hours
+        { wch: 20 }, // Blood Flow Rate
+        { wch: 20 }, // Inj Heparin Prime
+        { wch: 20 }, // Inj Heparin Bolus
+        { wch: 18 }, // Starting with Saline
+        { wch: 15 }, // Closing with Air
+        { wch: 18 }, // Closing with Saline
+        { wch: 18 }, // Blood Transfusion
+        { wch: 25 }, // Blood Transfusion Comment
+        { wch: 20 }, // B.P. Before Dialysis
+        { wch: 20 }, // B.P. After Dialysis
+        { wch: 20 }, // B.P. During Dialysis
+        { wch: 20 }, // Weight Pre Dialysis
+        { wch: 20 }, // Weight Post Dialysis
+        { wch: 15 }, // Weight Loss
+        { wch: 15 }, // Dry Weight
+        { wch: 15 }, // Weight Gain
+        { wch: 10 }, // SPO2
+        { wch: 25 }, // Dialysis Monitor Name FO
+        { wch: 20 }, // Dialysis Name / Size
+        { wch: 25 }, // Dialysis Number of Refuse
+        { wch: 25 }, // Blood Tube Number of Refuse
+        { wch: 18 }, // Dialysis Flow Rate
+        { wch: 15 }, // Bathacetete
+        { wch: 15 }, // Bath Bicarb
+        { wch: 18 }, // Na / Conductivity
+        { wch: 15 }, // Profiles No
+        { wch: 25 }, // Equipments Complaints
+        { wch: 25 }, // Patients Complaints
+        { wch: 10 }, // Fever
+        { wch: 10 }, // Rigor
+        { wch: 15 }, // Hypertension
+        { wch: 15 }, // Hypoglycemia
+        { wch: 20 }, // Dept In-Charge Sign
+      ];
+      worksheet['!cols'] = columnWidths;
+
+      // Add worksheet to workbook
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Dialysis Flow Chart');
+
+      // Generate filename with current date and patient name
+      const patientName = selectedPatient ? 
+        (selectedPatient.firstName || selectedPatient.name) + 
+        (selectedPatient.lastName ? ' ' + selectedPatient.lastName : '') : 'Unknown';
+      const date = formData.date || new Date().toISOString().split('T')[0];
+      const filename = `Dialysis_Flow_Chart_${patientName.replace(/\s+/g, '_')}_${date}.xlsx`;
+
+      // Save the file
+      const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+      const data = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      saveAs(data, filename);
+
+      setSuccess('Dialysis flow chart exported to Excel successfully!');
+      setTimeout(() => setSuccess(''), 3000);
+    } catch (error) {
+      console.error('Error exporting to Excel:', error);
+      setError('Failed to export to Excel. Please try again.');
+    }
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Form Data:', formData);
-    // Add form submission logic here
+    
+    // Validate required fields
+    if (!formData.patientId || !formData.date || !formData.bloodAccess || 
+        !formData.hdStartingTime || !formData.hdClosingTime) {
+      setError('Please fill in all required fields');
+      return;
+    }
+
+    setSubmitting(true);
+    setError('');
+    setSuccess('');
+
+    try {
+      const selectedPatient = getSelectedPatient();
+      if (!selectedPatient) {
+        setError('Please select a valid patient');
+        return;
+      }
+
+      const dialysisFlowChartData = {
+        ...formData,
+        patientName: (selectedPatient.firstName || selectedPatient.name) + 
+                    (selectedPatient.lastName ? ' ' + selectedPatient.lastName : '')
+      };
+
+      await dialysisFlowChartApi.addDialysisFlowChart(dialysisFlowChartData);
+      
+      setSuccess('Dialysis flow chart saved successfully!');
+      
+      // Reset form after successful submission
+      setFormData({
+        patientId: '',
+        date: '',
+        hemodialysisNIO: '',
+        bloodAccess: '',
+        hdStartingTime: '',
+        hdClosingTime: '',
+        durationHours: '',
+        bloodFlowRate: '',
+        injHeparinPrime: '',
+        injHeparinBolus: '',
+        startingWithSaline: false,
+        closingWithAir: false,
+        closingWithSaline: false,
+        bloodTransfusion: false,
+        bloodTransfusionComment: '',
+        bpBeforeDialysis: '',
+        bpAfterDialysis: '',
+        bpDuringDialysis: '',
+        weightPreDialysis: '',
+        weightPostDialysis: '',
+        weightLoss: '',
+        dryWeight: '',
+        weightGain: '',
+        dialysisMonitorNameFO: '',
+        dialysisNameSize: '',
+        dialysisNumberOfRefuse: '',
+        bloodTubeNumberOfRefuse: '',
+        dialysisFlowRate: '',
+        bathacetete: '',
+        bathBicarb: '',
+        naConductivity: '',
+        profilesNo: '',
+        equipmentsComplaints: '',
+        patientsComplaints: '',
+        spo2: '',
+        fever: false,
+        rigor: false,
+        hypertension: false,
+        hypoglycemia: false,
+        deptInChargeSign: '',
+      });
+
+      // Clear success message after 3 seconds
+      setTimeout(() => setSuccess(''), 3000);
+    } catch (err) {
+      console.error('Error saving dialysis flow chart:', err);
+      setError('Failed to save dialysis flow chart. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -115,12 +349,46 @@ const DialysisFlowChart: React.FC = () => {
       <div className="dialysis-flow-chart-header">
         <h2 className="dialysis-flow-chart-title">Dialysis Flow Chart</h2>
       </div>
+      
+      {/* Success and Error Messages */}
+      {success && (
+        <div className="alert alert-success" style={{ marginBottom: '1rem' }}>
+          {success}
+        </div>
+      )}
+      
+      {error && (
+        <div className="alert alert-danger" style={{ marginBottom: '1rem' }}>
+          {error}
+        </div>
+      )}
+      
       <div className="dialysis-flow-chart-form-container">
         <form onSubmit={handleSubmit}>
           {/* General Info */}
           <div className="form-section">
             <h3>General Info</h3>
             <div className="form-grid">
+              <div className="form-field">
+                <label>Patient</label>
+                <select 
+                  name="patientId" 
+                  value={formData.patientId} 
+                  onChange={handleChange} 
+                  required
+                  disabled={loading}
+                >
+                  <option value="">
+                    {loading ? 'Loading patients...' : 'Select Patient'}
+                  </option>
+                  {patients.map(patient => (
+                    <option key={patient.id} value={patient.id}>
+                      {(patient.firstName || patient.name) + (patient.lastName ? ' ' + patient.lastName : '')}
+                    </option>
+                  ))}
+                </select>
+                {error && <div className="error-message">{error}</div>}
+              </div>
               <div className="form-field">
                 <label>Date</label>
                 <input type="date" name="date" value={formData.date} onChange={handleChange} required />
@@ -139,6 +407,36 @@ const DialysisFlowChart: React.FC = () => {
                   <option value="Other">Other</option>
                 </select>
               </div>
+
+              {/* Selected Patient Information */}
+              {selectedPatient && (
+                <div className="selected-patient-info">
+                  <h4>Selected Patient Information</h4>
+                  <div className="patient-details-grid">
+                    <div className="patient-detail">
+                      <strong>Name:</strong> {(selectedPatient.firstName || selectedPatient.name) + (selectedPatient.lastName ? ' ' + selectedPatient.lastName : '')}
+                    </div>
+                    <div className="patient-detail">
+                      <strong>Gender:</strong> {selectedPatient.gender || 'N/A'}
+                    </div>
+                    <div className="patient-detail">
+                      <strong>Blood Group:</strong> {selectedPatient.bloodGroup}
+                    </div>
+                    <div className="patient-detail">
+                      <strong>Mobile:</strong> {selectedPatient.mobileNo || selectedPatient.phone || 'N/A'}
+                    </div>
+                    <div className="patient-detail">
+                      <strong>Date of Birth:</strong> {selectedPatient.dateOfBirth || 'N/A'}
+                    </div>
+                    <div className="patient-detail">
+                      <strong>Catheter Date:</strong> {selectedPatient.catheterDate || selectedPatient.catheterInsertionDate || 'N/A'}
+                    </div>
+                    <div className="patient-detail">
+                      <strong>Fistula Date:</strong> {selectedPatient.fistulaDate || selectedPatient.fistulaCreationDate || 'N/A'}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -330,9 +628,29 @@ const DialysisFlowChart: React.FC = () => {
           </div>
 
           <div className="form-buttons">
-            <button type="submit" className="btn-submit btn-with-gradient">Submit</button>
-            <button type="button" className="btn-print btn-with-gradient" onClick={handlePrint}>Print</button>
-            <button type="button" className="btn-export-excel btn-with-gradient" onClick={handleExportExcel}>Export to Excel</button>
+            <button 
+              type="submit" 
+              className="btn-submit btn-with-gradient" 
+              disabled={submitting}
+            >
+              {submitting ? 'Saving...' : 'Submit'}
+            </button>
+            <button 
+              type="button" 
+              className="btn-print btn-with-gradient" 
+              onClick={handlePrint}
+              disabled={submitting}
+            >
+              Print
+            </button>
+            <button 
+              type="button" 
+              className="btn-export-excel btn-with-gradient" 
+              onClick={handleExportExcel}
+              disabled={submitting}
+            >
+              Export to Excel
+            </button>
           </div>
         </form>
       </div>
