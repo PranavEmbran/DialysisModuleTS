@@ -100,9 +100,9 @@ const HaemodialysisRecordDetails: React.FC = () => {
 
   return (
     <div className="haemodialysis-record-content">
-      <div className="haemodialysis-record-header">
+      {/* <div className="haemodialysis-record-header">
         <h2 className="haemodialysis-record-title">Haemodialysis Record Details</h2>
-      </div>
+      </div> */}
       <div className="haemodialysis-record-form-container">
         {/* Patient Dropdown */}
         <div className="form-field" style={{ marginBottom: '1.5rem' }}>

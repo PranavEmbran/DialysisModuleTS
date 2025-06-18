@@ -10,6 +10,7 @@ import './Billing.css';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import type { Patient, Billing as BillingType } from '../types';
+import SectionHeading from '../components/SectionHeading';
 
 interface BillingFormValues {
   patientId: string;
@@ -25,15 +26,17 @@ const validationSchema = Yup.object({
   amount: Yup.number().required('Amount is required'),
 });
 
-const Billing: React.FC = () => {
+// const Billing: React.FC = () => {
+  const Billing: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }> = ({ sidebarCollapsed, toggleSidebar }) => {
+
   const [patients, setPatients] = useState<Patient[]>([]);
   const [bills, setBills] = useState<BillingType[]>([]);
   const [selectedBill, setSelectedBill] = useState<BillingType | null>(null);
   const [showPrintModal, setShowPrintModal] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const toggleSidebar = () => setSidebarCollapsed((prev) => !prev);
+  // const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  // const toggleSidebar = () => setSidebarCollapsed((prev) => !prev);
 
   useEffect(() => {
     patientsApi.getAllPatients().then(setPatients).catch(() => setError('Failed to fetch patients'));
@@ -95,14 +98,22 @@ const Billing: React.FC = () => {
 
   return (
     <>
-      <Container fluid className="billing-container py-5">
+      <Container fluid className={`billing-container py-5 ${sidebarCollapsed ? 'collapsed' : ''}`}>
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
         <Row className="mb-4">
           <Col>
             <Card className="shadow-sm">
-              <Card.Body>
-                <h2 className="home-title mb-4">Billing</h2>
+              {/* <Card.Body> */}
+                <SectionHeading title="Billing" subtitle="Manage and view patient billing records" />
+              {/* </Card.Body> */}
+            </Card>
+          </Col>
+        </Row>
 
+        <Row className="mb-4">
+          <Col>
+            <Card className="shadow-sm">
+                <Card.Body>
                 {success && (
                   <div className="alert alert-success">
                     Bill added successfully!

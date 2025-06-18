@@ -8,6 +8,7 @@ import './DialysisProcess.css';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { Patient } from '../types';
+import SectionHeading from '../components/SectionHeading';
 
 interface VitalSigns {
   bloodPressure: string;
@@ -76,12 +77,12 @@ const validationSchema = Yup.object({
   nursingNotes: Yup.string().required('Nursing notes are required')
 });
 
-const DialysisProcess: React.FC = () => {
+const DialysisProcess: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }> = ({ sidebarCollapsed, toggleSidebar }) => { 
   const [patients, setPatients] = useState<Patient[]>([]);
   const [success, setSuccess] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const toggleSidebar = () => setSidebarCollapsed((prev) => !prev);
+  // const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  // const toggleSidebar = () => setSidebarCollapsed((prev) => !prev);
 
   useEffect(() => {
     const fetchPatients = async () => {
@@ -150,8 +151,13 @@ const DialysisProcess: React.FC = () => {
 
   return (
     <>
-    <Container fluid className="dialysis-process-container py-3">
+    <Container fluid className={`dialysis-process-container py-3 ${sidebarCollapsed ? 'collapsed' : ''}`}>
     <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
+      <Row className="mb-4">
+        <Col>
+          <SectionHeading title="Dialysis Process" subtitle="Monitor and record dialysis procedures" />
+        </Col>
+      </Row>
       <Row>
         <Col>
           <Card className="shadow-sm">

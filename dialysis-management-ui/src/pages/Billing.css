@@ -480,6 +480,12 @@
   box-shadow: 0 0 0 2px rgba(179, 229, 252, 0.2);
 }
 
+.billing-container.collapsed {
+  left: 0;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
 .btn-primary {
   background-color: #B3E5FC;
   color: #333;

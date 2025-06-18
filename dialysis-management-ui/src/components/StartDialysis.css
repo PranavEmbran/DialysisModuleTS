@@ -1,4 +1,4 @@
-.start-dialysis-container {
+/* .start-dialysis-container {
   height: calc(100vh - 64px);
   width: calc(100% - 240px);
   background-color: #f8f9fa;
@@ -12,6 +12,12 @@
   transition: all 0.3s ease;
   padding: 1.5rem;
   gap: 1.5rem;
+}
+
+.start-dialysis-container.collapsed {
+  left: 0;
+  width: 100%;
+  transition: all 0.3s ease;
 }
 
 .start-dialysis-card {
@@ -175,4 +181,4 @@
     padding: 0.75rem;
     font-size: 0.9rem;
   }
-} 
+}  */

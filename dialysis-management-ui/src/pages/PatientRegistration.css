@@ -24,6 +24,13 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 2rem;
   margin-bottom: 2rem;
+  border-top: 5px solid #0097a7;
+}
+
+.patient-registration-container.collapsed {
+  left: 0;
+  width: 100%;
+  transition: all 0.3s ease;
 }
 
 .patient-registration-title {

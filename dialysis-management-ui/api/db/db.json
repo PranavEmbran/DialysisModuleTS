@@ -135,6 +135,21 @@
       "fistulaDate": "2025-06-18",
       "phone": "9876543215",
       "id": "1750229983261"
+    },
+    {
+      "firstName": "Renjini",
+      "lastName": "Raj",
+      "gender": "Female",
+      "dateOfBirth": "2002-05-08",
+      "mobileNo": "9876543215",
+      "bloodGroup": "B+",
+      "catheterInsertionDate": "2025-06-18",
+      "fistulaCreationDate": "2025-06-18",
+      "name": "Renjini Raj",
+      "catheterDate": "2025-06-18",
+      "fistulaDate": "2025-06-18",
+      "phone": "9876543215",
+      "id": "1750248066886"
     }
   ],
   "appointments": [
@@ -225,6 +240,17 @@
       "time": "15:56",
       "remarks": "Regular dialysis session",
       "patientName": "Krishna Raj"
+    },
+    {
+      "patientId": "1750248066886",
+      "dialysisUnit": "Unit C",
+      "technician": "Dr. Wilson",
+      "admittingDoctor": "Dr. Davis",
+      "date": "2025-06-19",
+      "time": "21:31",
+      "remarks": "lll\n",
+      "patientName": "Renjini Raj",
+      "id": "1750248102189"
     }
   ],
   "billing": [

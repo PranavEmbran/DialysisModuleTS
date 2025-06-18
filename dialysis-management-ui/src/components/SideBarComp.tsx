@@ -4,7 +4,7 @@ import './SideBar.css';
 import { FaCaretRight } from 'react-icons/fa';
 
 interface SideBarCompProps {
-  collapsed?: boolean;
+    collapsed?: boolean;
 }
 
 const today = new Date();
@@ -34,9 +34,7 @@ const SideBar: React.FC<SideBarCompProps> = ({ collapsed = false }) => {
             )}
             <nav>
                 <ul>
-                    <li>
-                        {!collapsed && <li className="sidebar-title">Dialysis Management</li>}
-                    </li>
+                    {!collapsed && (<li className="sidebar-title">Dialysis Management</li>)}
                     <li>
                         <NavLink
                             to="/dashboard"

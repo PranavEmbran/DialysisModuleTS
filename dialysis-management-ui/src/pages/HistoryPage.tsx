@@ -1,8 +1,8 @@
-import React from 'react';
-import DialysisHistory from '../components/DialysisHistory';
+// import React from 'react';
+// import DialysisHistory from '../components/DialysisHistory';
 
-const HistoryPage: React.FC = () => {
-  return <DialysisHistory />;
-};
+// const HistoryPage: React.FC = () => {
+//   return <DialysisHistory />;
+// };
 
-export default HistoryPage; 
+// export default HistoryPage; 

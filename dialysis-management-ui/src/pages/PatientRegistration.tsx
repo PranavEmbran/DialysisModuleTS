@@ -6,6 +6,8 @@ import './PatientRegistration.css';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { Patient } from '../types';
+import SectionHeading from '../components/SectionHeading';
+import { Row, Col } from 'react-bootstrap';
 
 interface PatientFormValues {
   firstName: string;
@@ -33,11 +35,11 @@ const validationSchema = Yup.object({
 
 const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 
-const PatientRegistration: React.FC = () => {
+const PatientRegistration: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }> = ({ sidebarCollapsed, toggleSidebar }) => {
   const [success, setSuccess] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const toggleSidebar = () => setSidebarCollapsed((prev) => !prev);
+  // const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  // const toggleSidebar = () => setSidebarCollapsed((prev) => !prev);
 
   const handleSubmit = async (values: PatientFormValues, { resetForm }: FormikHelpers<PatientFormValues>) => {
     try {
@@ -63,10 +65,14 @@ const PatientRegistration: React.FC = () => {
 
   return (
     <>
-    <div className="patient-registration-container">
+    <div className={`patient-registration-container ${sidebarCollapsed ? 'collapsed' : ''}`}>
     <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
+        <Row className="mb-4">
+          <Col>
+            <SectionHeading title="Patient Registration" subtitle="Register new patients and manage patient details" />
+          </Col>
+        </Row>
       <div className="patient-registration-card">
-        <h2 className="patient-registration-title">Patient Registration</h2>
         
         {success && (
           <div className="alert alert-success">

@@ -47,7 +47,8 @@ const Header: React.FC<HeaderProps> = ({ sidebarCollapsed, toggleSidebar }) => {
                     style={{ width: 24, height: 24, transform: sidebarCollapsed ? "scaleX(-1)" : "none" }}
                 />
             </button>
-            <h1>Dialysis Management</h1>
+            {/* <h1>Dialysis Management</h1> */}
+            <h1></h1>
             <div className="header-div ">
                 <div className="icons-div">
                     <div className="icon-item">

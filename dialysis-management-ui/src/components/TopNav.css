@@ -116,7 +116,7 @@
 }
 
 .nav-list2 li a {
-    color: white;
+    color: #ccc;
     text-decoration: none;
     font-weight: 500;
     padding: 6px 10px;
@@ -202,7 +202,7 @@
     font-size: 12px;
   }
   .searchBar input {
-    width: 240px;
+    width: 350px;
   }
   .nav-list {
     gap: 10px;

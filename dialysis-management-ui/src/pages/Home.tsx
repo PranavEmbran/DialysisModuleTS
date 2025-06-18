@@ -9,6 +9,7 @@ import { patientsApi } from '../api/patientsApi';
 import { scheduleApi } from '../api/scheduleApi';
 import { historyApi } from '../api/historyApi';
 import { Patient, ScheduleEntry, History } from '../types';
+import SectionHeading from '../components/SectionHeading';
 
 interface Stat {
   label: string;
@@ -16,13 +17,14 @@ interface Stat {
   icon: React.ReactNode;
 }
 
+
 interface FilteredData {
   patients: Patient[];
   appointments: ScheduleEntry[];
   history: History[];
 }
 
-const Dashboard: React.FC = () => {
+const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }> = ({ sidebarCollapsed, toggleSidebar }) => {
   // State for real data
   const [patients, setPatients] = useState<Patient[]>([]);
   const [appointments, setAppointments] = useState<ScheduleEntry[]>([]);
@@ -38,10 +40,6 @@ const Dashboard: React.FC = () => {
   const [autoRefresh, setAutoRefresh] = useState<number>(15);
   const [showAll, setShowAll] = useState<boolean>(true);
   const [search, setSearch] = useState<string>('');
-
-  // UI states
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const toggleSidebar = () => setSidebarCollapsed((prev) => !prev);
 
   // Auto-refresh timer
   const [refreshTimer, setRefreshTimer] = useState<NodeJS.Timeout | null>(null);
@@ -248,9 +246,15 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-    <Container fluid className="home-container py-5">
+    {/* <Container fluid className="home-container py-5"> */}
+    <Container fluid className={`home-container py-5 ${sidebarCollapsed ? 'collapsed' : ''}`}>
     <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
-          <Row className="mb-4">
+      <Row className="mb-4">
+        <Col>
+          <SectionHeading title="Dashboard" subtitle="Overview and quick stats for dialysis management" />
+        </Col>
+      </Row>
+      <Row className="mb-4">
         {stats.map((stat) => (
           <Col key={stat.label} md={4} className="mb-3">
             <div className="dashboard-card text-center p-4 shadow-sm rounded bg-white h-100 d-flex flex-column align-items-center justify-content-center">

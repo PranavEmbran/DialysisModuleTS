@@ -18,6 +18,12 @@
   padding: 2rem;
 }
 
+.history-container.collapsed {
+  left: 0;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
 .history-header {
   background-color: #ffffff;
   border-radius: 8px;

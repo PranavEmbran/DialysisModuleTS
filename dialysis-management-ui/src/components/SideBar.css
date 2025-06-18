@@ -43,7 +43,7 @@
 
 .sidebar a {
     text-decoration: none;
-    color: #fffafa;
+    color: #ccc;
     /* border-radius: 10px; */
 
 }
@@ -81,7 +81,7 @@
 
 /* Collapsed Sidebar Styles */
 .sidebar.collapsed {
-    width: 60px;
+    width: 0px;
     transition: width 0.3s ease;
 }
 
@@ -99,15 +99,19 @@
 }
 
 .sidebar.collapsed .nav-item:hover {
-    background-color: #80def7;
+    display: none;
+
+    /* background-color: #80def7;
     border-right: 4px solid #0d92ae;
-    color: black;
+    color: black; */
 }
 
 .sidebar.collapsed .nav-item.active {
-    background-color: #80def7;
+    /* background-color: #80def7;
     color: black;
-    border-right: 4px solid #0d92ae;
+    border-right: 4px solid #0d92ae; */
+    display: none;
+
 }
 
 .sidebar-header-section {

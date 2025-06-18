@@ -8,6 +8,7 @@ import { Patient, ScheduleEntry, StaffData } from '../types';
 import './Schedule.css';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import SectionHeading from '../components/SectionHeading';
 
 interface ScheduleFormValues {
   patientId: string;
@@ -29,14 +30,14 @@ const validationSchema = Yup.object({
   remarks: Yup.string()
 });
 
-const Schedule: React.FC = () => {
+const Schedule: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }> = ({ sidebarCollapsed, toggleSidebar }) => {
   const [schedules, setSchedules] = useState<ScheduleEntry[]>([]);
   const [patients, setPatients] = useState<Patient[]>([]);
   const [staff, setStaff] = useState<StaffData>({ technicians: [], doctors: [], units: [] });
   const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState<boolean>(false);
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const toggleSidebar = () => setSidebarCollapsed((prev) => !prev);
+  // const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  // const toggleSidebar = () => setSidebarCollapsed((prev) => !prev);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -90,8 +91,13 @@ const Schedule: React.FC = () => {
 
   return (
     <>
-    <Container fluid className="home-container py-5">
+    <Container fluid className={`home-container py-5 ${sidebarCollapsed ? 'collapsed' : ''}`}>
     <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
+      <Row className="mb-4">
+        <Col>
+          <SectionHeading title="Schedule" subtitle="Manage and view dialysis appointments" />
+        </Col>
+      </Row>
       <Row className="mb-4">
         <Col>
           <Card className="shadow-sm">

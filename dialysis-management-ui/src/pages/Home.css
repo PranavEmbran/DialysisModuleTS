@@ -24,6 +24,14 @@
   max-width: 1200px;
 }
 
+.home-container.collapsed {
+  left: 0px;
+  /* width: calc(100% - 0px); */
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+
 .home-title {
   color: #2c3e50;
   font-weight: 600;
@@ -115,7 +123,7 @@
 
 .dashboard-icon {
   font-size: 2rem;
-  color: #007bff;
+  color: #0097a7;
   margin-bottom: 1rem;
 }
 

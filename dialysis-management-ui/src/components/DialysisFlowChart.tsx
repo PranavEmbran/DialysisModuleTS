@@ -346,9 +346,9 @@ const DialysisFlowChart: React.FC = () => {
 
   return (
     <div className="dialysis-flow-chart-content">
-      <div className="dialysis-flow-chart-header">
+      {/* <div className="dialysis-flow-chart-header">
         <h2 className="dialysis-flow-chart-title">Dialysis Flow Chart</h2>
-      </div>
+      </div> */}
       
       {/* Success and Error Messages */}
       {success && (

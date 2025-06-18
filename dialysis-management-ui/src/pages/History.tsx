@@ -5,15 +5,17 @@ import './History.css';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import type { Patient, History } from '../types';
+import SectionHeading from '../components/SectionHeading';
+import { Row, Col } from 'react-bootstrap';
 
-const History: React.FC = () => {
+const History: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void }> = ({ sidebarCollapsed, toggleSidebar }) => {
   const [history, setHistory] = useState<History[]>([]);
   const [patients, setPatients] = useState<Patient[]>([]);
   const [selectedPatient, setSelectedPatient] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const toggleSidebar = () => setSidebarCollapsed((prev) => !prev);
+  // const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  // const toggleSidebar = () => setSidebarCollapsed((prev) => !prev);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,8 +61,13 @@ const History: React.FC = () => {
 
   return (
     <>
-    <div className="history-container">
+    <div className={`history-container ${sidebarCollapsed ? 'collapsed' : ''}`}>
     <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
+      <Row className="mb-4">
+        <Col>
+          <SectionHeading title="History" subtitle="View and manage dialysis session history" />
+        </Col>
+      </Row>
       <div className="history-header">
         <h2 className="history-title">Dialysis History</h2>
         
