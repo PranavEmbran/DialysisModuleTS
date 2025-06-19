@@ -257,7 +257,8 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
       <Row className="mb-4">
         {stats.map((stat) => (
           <Col key={stat.label} md={4} className="mb-3">
-            <div className="dashboard-card text-center p-4 shadow-sm rounded bg-white h-100 d-flex flex-column align-items-center justify-content-center">
+            {/* <div className="dashboard-card text-center p-4 shadow-sm rounded bg-white h-100 d-flex flex-column align-items-center justify-content-center"> */}
+            <div className="dashboard-card text-center p-4 shadow-sm rounded bg-white h-75 w-50 d-flex flex-column align-items-center justify-content-center">
               <div className="dashboard-icon mb-2">{stat.icon}</div>
               <div className="dashboard-value mb-1">{stat.value}</div>
               <div className="dashboard-label">{stat.label}</div>
@@ -359,8 +360,8 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
       </Row>
       <Row>
         <Col>
-          <h3>Registered Patients ({filteredData.patients.length})</h3>
           <div className="table-responsive">
+          <div className='dashboard-table-heading'>Registered Patients: {filteredData.patients.length}</div>
             <table className="table table-striped table-hover align-middle">
               <thead className="table-light">
                 <tr>
@@ -405,8 +406,8 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
       </Row>
       <Row>
         <Col>
-          <h3>Recent Appointments ({filteredData.appointments.length})</h3>
           <div className="table-responsive">
+          <div className='dashboard-table-heading'>Recent Appointments: {filteredData.appointments.length}</div>
             <table className="table table-striped table-hover align-middle">
               <thead className="table-light">
                 <tr>

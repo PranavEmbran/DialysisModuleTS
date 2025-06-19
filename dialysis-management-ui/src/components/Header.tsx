@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Header.css';
 import { ChevronLeftIcon, ChevronRightIcon } from '@primer/octicons-react';
 import { Calendar, Clock, Calculator } from 'lucide-react';
+import { FaCalculator, FaCalendarAlt, FaClock } from 'react-icons/fa';
 
 interface HeaderProps {
   sidebarCollapsed: boolean;
@@ -52,15 +53,17 @@ const Header: React.FC<HeaderProps> = ({ sidebarCollapsed, toggleSidebar }) => {
             <div className="header-div ">
                 <div className="icons-div">
                     <div className="icon-item">
-                        <Calendar size={25} className='header-icon' />
+                        {/* <Calendar size={25} className='header-icon' /> */}
+                        <FaCalendarAlt size={25} className='header-icon' />
                         <span className='header-span'>{currentDate}</span>
                     </div>
                     <div className="icon-item">
-                        <Clock size={25} className='header-icon' />
+                        <FaClock size={25} className='header-icon' />
                         <span className='header-span'>{formattedTime}</span>
                     </div>
                     <div className="icon-item">
-                        <Calculator size={25} className='header-icon' />
+                        {/* <Calculator size={25} className='header-icon' /> */}
+                        <FaCalculator size={25} className='header-icon' />
                         {/* <span>Calculator</span> */}
                     </div>
                 </div>

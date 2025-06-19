@@ -43,9 +43,30 @@ const TopNav: React.FC<TopNavProps> = ({ searchQuery, setSearchQuery }) => {
           <li className='nav-link'><NavLink to="/registration" className={({ isActive }) => isActive ? 'active' : ''}>Patient Registration</NavLink></li>
           <li className='nav-link'><NavLink to="/schedule" className={({ isActive }) => isActive ? 'active' : ''}>Schedule</NavLink></li>
           <li className='nav-link'><NavLink to="/process" className={({ isActive }) => isActive ? 'active' : ''}>Start Dialysis</NavLink></li>
+          {/* <li className='nav-link'><NavLink to="/dialysis-flow-chart" className={({ isActive }) => isActive ? 'active' : ''}>Flow Chart</NavLink></li>
+          <li className='nav-link'><NavLink to="/haemodialysis-record-details" className={({ isActive }) => isActive ? 'active' : ''}>HD Record</NavLink></li>
           <li className='nav-link'><NavLink to="/billing" className={({ isActive }) => isActive ? 'active' : ''}>Billing</NavLink></li>
-          <li className='nav-link'><NavLink to="/history" className={({ isActive }) => isActive ? 'active' : ''}>History</NavLink></li>
+          <li className='nav-link'><NavLink to="/history" className={({ isActive }) => isActive ? 'active' : ''}>History</NavLink></li> */}
         </ul>
+
+        <div className="nav-permanent-more-wrapper" ref={dropdownRef}>
+          <button className="nav-permanent-more-btn" onClick={handleDropdownToggle} aria-expanded={dropdownOpen} aria-controls="nav-more-dropdown">
+            More <FaChevronDown style={{ marginLeft: 4 }} />
+          </button>
+          {dropdownOpen && (
+            <div className="nav-permanent-more-dropdown" id="nav-permanent-more-dropdown">
+              {/* <NavLink to="/dashboard" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Dashboard</NavLink>
+              <NavLink to="/registration" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Patient Registration</NavLink>
+              <NavLink to="/schedule" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Schedule</NavLink>
+              <NavLink to="/process" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Start Dialysis</NavLink> */}
+              <NavLink to="/dialysis-flow-chart" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Flow Chart</NavLink>
+              <NavLink to="/haemodialysis-record-details" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>HD Record</NavLink>
+              <NavLink to="/billing" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Billing</NavLink>
+              <NavLink to="/history" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>History</NavLink>
+            </div>
+          )}
+        </div>
+
         <div className="nav-more-wrapper" ref={dropdownRef}>
           <button className="nav-more-btn" onClick={handleDropdownToggle} aria-expanded={dropdownOpen} aria-controls="nav-more-dropdown">
             More <FaChevronDown style={{ marginLeft: 4 }} />
@@ -56,6 +77,8 @@ const TopNav: React.FC<TopNavProps> = ({ searchQuery, setSearchQuery }) => {
               <NavLink to="/registration" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Patient Registration</NavLink>
               <NavLink to="/schedule" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Schedule</NavLink>
               <NavLink to="/process" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Start Dialysis</NavLink>
+              <NavLink to="/dialysis-flow-chart" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Flow Chart</NavLink>
+              <NavLink to="/haemodialysis-record-details" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>HD Record</NavLink>
               <NavLink to="/billing" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Billing</NavLink>
               <NavLink to="/history" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>History</NavLink>
             </div>

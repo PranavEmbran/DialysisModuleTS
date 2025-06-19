@@ -162,7 +162,7 @@ const DialysisProcess: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () =
         <Col>
           <Card className="shadow-sm">
             <Card.Body>
-              <h2 className="home-title">Start Dialysis Process</h2>
+              <h4 className="home-title">Start Dialysis Process</h4>
 
               {success && (
                 <div className="alert alert-success">
@@ -228,7 +228,7 @@ const DialysisProcess: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () =
                       <Col md={6}>
                         <Card className="mb-2">
                           <Card.Body>
-                            <h3 className="home-title">Vital Signs</h3>
+                            <h4 className="home-title">Vital Signs</h4>
                             <Row>
                               <Col md={6}>
                                 <h4>Pre-Dialysis</h4>
@@ -355,7 +355,7 @@ const DialysisProcess: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () =
                       <Col md={6}>
                         <Card className="mb-2">
                           <Card.Body>
-                            <h3 className="home-title">Lab Results</h3>
+                            <h4 className="home-title">Lab Results</h4>
                             <Row>
                               <Col md={6}>
                                 <div className="form-group">
@@ -415,7 +415,7 @@ const DialysisProcess: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () =
 
                         <Card className="mb-2">
                           <Card.Body>
-                            <h3 className="home-title">Treatment Parameters</h3>
+                            <h4 className="home-title">Treatment Parameters</h4>
                             <Row>
                               <Col md={6}>
                                 <div className="form-group">
