@@ -65,29 +65,27 @@ const PatientRegistration: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: 
 
   return (
     <>
-    <div className={`patient-registration-container ${sidebarCollapsed ? 'collapsed' : ''}`}>
-    <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
-        <Row className="mb-4">
-          <Col>
-            <SectionHeading title="Patient Registration" subtitle="Register new patients and manage patient details" />
-          </Col>
-        </Row>
+
+      {/* <div className="page-container border border-danger"> */}
+      <div className={`patient-container py-2 ${sidebarCollapsed ? 'collapsed' : ''}`}>
+      <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
+      <div className="main-container">
+      <div style={{ width: '100%' ,padding: '10px'}}>
+        <SectionHeading title="Patient Registration" subtitle="Register new patients and manage patient details" />
+      </div>
       <div className="patient-registration-card">
-        
         {success && (
           <div className="alert alert-success">
             Patient registered successfully!
             <button type="button" className="btn-close" onClick={() => setSuccess(false)}></button>
           </div>
         )}
-        
         {error && (
           <div className="alert alert-danger">
             {error}
             <button type="button" className="btn-close" onClick={() => setError('')}></button>
           </div>
         )}
-
         <Formik
           initialValues={{
             firstName: '',
@@ -231,8 +229,9 @@ const PatientRegistration: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: 
           )}
         </Formik>
       </div>
+      </div>
       <Footer />
-    </div>
+      </div>
     </>
   );
 };

@@ -28,12 +28,12 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      <div className="app">
-        <div className="main-container">
+      {/* <div className="app"> */}
+        <TopNav searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
           <SideBarComp collapsed={sidebarCollapsed} />
-          {/* <SideBar /> */}
-          <TopNav searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-          <main className="main-content">
+        {/* <div className="main-container"> */}
+          
+          {/* <div className="page-container border border-danger"> */}
             <Routes>
               <Route path="/dashboard" element={<Dashboard sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />} />
               <Route path="/" element={<Dashboard sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />} />
@@ -46,10 +46,10 @@ const App: React.FC = () => {
               <Route path="/dialysis-flow-chart" element={<DialysisFlowChartPage sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar}  />} />
               <Route path="/haemodialysis-record-details" element={<HaemodialysisRecordDetailsPage sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar}  />} />
             </Routes>
-          </main>
-        </div>
+          {/* </div> */}
+        {/* </div> */}
         {/* <Footer /> */}
-      </div>
+      {/* </div> */}
     </Router>
   );
 };

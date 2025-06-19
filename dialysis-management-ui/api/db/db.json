@@ -150,6 +150,21 @@
       "fistulaDate": "2025-06-18",
       "phone": "9876543215",
       "id": "1750248066886"
+    },
+    {
+      "firstName": "Arun",
+      "lastName": "Kumar",
+      "gender": "Male",
+      "dateOfBirth": "2000-05-05",
+      "mobileNo": "9876543215",
+      "bloodGroup": "AB-",
+      "catheterInsertionDate": "2025-06-19",
+      "fistulaCreationDate": "2025-06-19",
+      "name": "Arun Kumar",
+      "catheterDate": "2025-06-19",
+      "fistulaDate": "2025-06-19",
+      "phone": "9876543215",
+      "id": "1750319571103"
     }
   ],
   "appointments": [
@@ -251,6 +266,28 @@
       "remarks": "lll\n",
       "patientName": "Renjini Raj",
       "id": "1750248102189"
+    },
+    {
+      "patientId": "1750319571103",
+      "dialysisUnit": "Unit A",
+      "technician": "Dr. Miller",
+      "admittingDoctor": "Dr. Miller",
+      "date": "2025-06-19",
+      "time": "13:23",
+      "remarks": "",
+      "patientName": "Arun Kumar",
+      "id": "1750319592898"
+    },
+    {
+      "patientId": "1750229983261",
+      "dialysisUnit": "Unit C",
+      "technician": "Dr. Brown",
+      "admittingDoctor": "Dr. Johnson",
+      "date": "2025-06-21",
+      "time": "16:25",
+      "remarks": "iu",
+      "patientName": "Ashwin Shankar",
+      "id": "1750319735542"
     }
   ],
   "billing": [
@@ -480,6 +517,76 @@
       "nursingNotes": "Treatment completed without complications",
       "patientName": "Krishna Raj",
       "date": "2025-06-18"
+    },
+    {
+      "patientId": "1750319571103",
+      "startTime": "13:23",
+      "endTime": "15:23",
+      "vitalSigns": {
+        "preDialysis": {
+          "bloodPressure": "110",
+          "heartRate": 72,
+          "temperature": 37,
+          "weight": 76
+        },
+        "postDialysis": {
+          "bloodPressure": "110",
+          "heartRate": 72,
+          "temperature": 37,
+          "weight": 76
+        }
+      },
+      "labResults": {
+        "urea": 576,
+        "creatinine": 567,
+        "potassium": 56,
+        "sodium": 675
+      },
+      "treatmentParameters": {
+        "dialyzer": "76",
+        "bloodFlow": 56,
+        "dialysateFlow": 45,
+        "ultrafiltration": 34
+      },
+      "nursingNotes": "rrr",
+      "patientName": "Arun Kumar",
+      "date": "2025-06-19",
+      "id": "1750319653564"
+    },
+    {
+      "patientId": "1749718581212",
+      "startTime": "13:26",
+      "endTime": "14:26",
+      "vitalSigns": {
+        "preDialysis": {
+          "bloodPressure": "110",
+          "heartRate": 34,
+          "temperature": 45,
+          "weight": 34
+        },
+        "postDialysis": {
+          "bloodPressure": "45",
+          "heartRate": 45,
+          "temperature": 34,
+          "weight": 345
+        }
+      },
+      "labResults": {
+        "urea": 3453,
+        "creatinine": 453,
+        "potassium": 45,
+        "sodium": 453
+      },
+      "treatmentParameters": {
+        "dialyzer": "79",
+        "bloodFlow": 89,
+        "dialysateFlow": 879,
+        "ultrafiltration": 789
+      },
+      "nursingNotes": "789",
+      "patientName": "Vignesh Sharma",
+      "date": "2025-06-19",
+      "id": "1750319779117"
     }
   ],
   "dialysisFlowCharts": [

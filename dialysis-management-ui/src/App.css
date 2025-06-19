@@ -10,10 +10,13 @@
 <Card.Body style={{marginLeft:"10px" ,marginRight:"10px",paddingBottom:"0px" }}> */
 
 
+
 .top-nav {
   width: 100%;
   height: 50px;
-  position: fixed;
+  position: sticky;
+  top: 0;
+  z-index: 100;
   background-color: #061320;
   padding: 10px 20px;
   display: flex;
@@ -117,10 +120,37 @@ color: #ffffff;
   color: rgba(255, 255, 255, 0.7);
 }
 
-.main-container {
+
+
+/* .main-container {
   display: flex;
-  flex: 1;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 100vh;
+} */
+
+/* Adjust main-container to align SideBarComp and page-container horizontally */
+/* .main-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 100vh;
+} */
+
+/***********/
+.main-container {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 32px 0;
+  border-top: 5px solid #0097a7;
 }
+/***********/
 
 .main-content {
   padding-bottom: 60px;
@@ -441,3 +471,27 @@ color: #ffffff;
   display: inline-block;
   text-decoration: inherit;
 }
+
+.page-container {
+  background-color: #fff;
+  border-top: 5px solid #038ba4;
+  margin-top: 35px;
+  margin-left: 300px;
+  margin-right: 30px;
+  flex: 1;
+  min-height: calc(100vh - 85px); /* adjust for nav height and margin */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  border-radius: 8px;
+  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Adjust main-container to align SideBarComp and page-container horizontally
+.main-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 100vh;
+} */

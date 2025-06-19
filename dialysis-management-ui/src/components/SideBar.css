@@ -10,6 +10,20 @@
     /* top: 64px; */
 }
 
+.sidebar-header-top-wrap {
+    display: flex;
+    align-items: center;     /* vertical centering */
+    justify-content: flex-start;
+    gap: 10px;                /* space between image and text */
+    padding: 0 10px;
+  }
+  .sidebar-header-text-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+    
+
 .sidebar-title {
     font-weight: bold;
     /* font-size: 1.2rem; */
