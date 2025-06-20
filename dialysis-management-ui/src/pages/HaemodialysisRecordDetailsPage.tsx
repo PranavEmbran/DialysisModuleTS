@@ -9,12 +9,12 @@ const HaemodialysisRecordDetailsPage: React.FC<{ sidebarCollapsed: boolean; togg
   return (
     <div className={`haemodialysis-record-page-container ${sidebarCollapsed ? 'collapsed' : ''}`}>
       <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
-      <Row className="mb-4">
-        <Col>
+      <div className="main-container">
+        <div style={{ width: '100%', padding: '20px' }}>
           <SectionHeading title="Haemodialysis Record Details" subtitle="Detailed records for haemodialysis sessions" />
-        </Col>
-      </Row>
+        </div>
       <HaemodialysisRecordDetails />
+      </div>
       <Footer />
     </div>
   );

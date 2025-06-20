@@ -178,6 +178,7 @@
   margin-top: 1rem;
 }
 
+
 .table {
   margin-bottom: 0;
 }
@@ -211,7 +212,5 @@
     margin-bottom: 1rem;
   }
 
-  .table-responsive {
-    padding: 0.5rem;
-  }
+
 }

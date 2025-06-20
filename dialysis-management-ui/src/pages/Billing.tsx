@@ -100,15 +100,12 @@ const validationSchema = Yup.object({
     <>
       <Container fluid className={`billing-container py-5 ${sidebarCollapsed ? 'collapsed' : ''}`}>
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
-        <Row className="mb-4">
-          <Col>
-            <Card className="shadow-sm">
-              {/* <Card.Body> */}
+        <div className="main-container">
+
+              <div style={{ width: '100%' ,padding: '10px'}}>
                 <SectionHeading title="Billing" subtitle="Manage and view patient billing records" />
-              {/* </Card.Body> */}
-            </Card>
-          </Col>
-        </Row>
+              </div>
+
 
         <Row className="mb-4">
           <Col>
@@ -265,6 +262,7 @@ const validationSchema = Yup.object({
             </div>
           </div>
         )}
+        </div>
         <Footer />
       </Container>
     </>

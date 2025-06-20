@@ -93,11 +93,10 @@ const Schedule: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void 
     <>
     <Container fluid className={`home-container py-5 ${sidebarCollapsed ? 'collapsed' : ''}`}>
     <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
-      <Row className="mb-4">
-        <Col>
-          <SectionHeading title="Schedule" subtitle="Manage and view dialysis appointments" />
-        </Col>
-      </Row>
+    <div className="main-container">
+      <div style={{ width: '100%' ,padding: '20px'}}>
+        <SectionHeading title="Schedule" subtitle="Manage and view dialysis appointments" />
+      </div>
       <Row className="mb-4">
         <Col>
           <Card className="shadow-sm">
@@ -244,6 +243,7 @@ const Schedule: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void 
           </Card>
         </Col>
       </Row>
+      </div>
     <Footer />
     </Container>
     </>

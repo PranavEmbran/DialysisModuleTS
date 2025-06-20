@@ -153,11 +153,10 @@ const DialysisProcess: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () =
     <>
     <Container fluid className={`dialysis-process-container py-3 ${sidebarCollapsed ? 'collapsed' : ''}`}>
     <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
-      <Row className="mb-4">
-        <Col>
-          <SectionHeading title="Dialysis Process" subtitle="Monitor and record dialysis procedures" />
-        </Col>
-      </Row>
+    <div className="main-container">
+      <div style={{ width: '100%' ,padding: '20px'}}>
+        <SectionHeading title="Dialysis Process" subtitle="Monitor and record dialysis procedures" />
+      </div>
       <Row>
         <Col>
           <Card className="shadow-sm">
@@ -507,7 +506,8 @@ const DialysisProcess: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () =
           </Card>
         </Col>
       </Row>
-      <Footer />
+      </div>
+      <Footer />  
     </Container>
     </>
   );
