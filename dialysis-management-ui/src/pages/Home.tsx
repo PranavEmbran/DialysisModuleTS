@@ -221,14 +221,14 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
     return (
       <>
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
-      <Container fluid className="home-container py-5">
-        <div className="text-center py-5">
-          <div className="spinner-border" role="status">
-            <span className="visually-hidden">Loading...</span>
+        <Container fluid className="home-container py-5">
+          <div className="text-center py-5">
+            <div className="spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+            <p className="mt-3">Loading dashboard data...</p>
           </div>
-          <p className="mt-3">Loading dashboard data...</p>
-        </div>
-      </Container>
+        </Container>
       </>
     );
   }
@@ -250,25 +250,26 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
     <>
       {/* <Container fluid className={`page-container py-5 ${sidebarCollapsed ? 'collapsed' : ''}`}> */}
 
-        {/* <Container fluid className="home-container py-5"> */}
-        <Container fluid className={`home-container py-5 ${sidebarCollapsed ? 'collapsed' : ''}`}>
+      {/* <Container fluid className="home-container py-5"> */}
+      {/* <Container fluid className={`home-container py-5 ${sidebarCollapsed ? 'collapsed' : ''}`}> */}
+      <Container fluid className={`home-container py-5 ${sidebarCollapsed ? 'collapsed' : ''}`}>
         <Header sidebarCollapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
         <div className="main-container">
 
-          <div style={{ width: '100%' ,padding: '10px'}}>
-            <SectionHeading title="Dashboard" subtitle="Overview and quick stats for dialysis management"/>
+          <div style={{ width: '100%', padding: '10px' }}>
+            <SectionHeading title="Dashboard" subtitle="Overview and quick stats for dialysis management" />
           </div>
           <Row className="mb-4">
-  {stats.map((stat) => (
-    <Col key={stat.label} md={4} className="mb-3 d-flex">
-      <div className="dashboard-card text-center p-4 shadow-sm rounded bg-white w-100 d-flex flex-column align-items-center justify-content-center">
-        <div className="dashboard-icon mb-2">{stat.icon}</div>
-        <div className="dashboard-value mb-1">{stat.value}</div>
-        <div className="dashboard-label">{stat.label}</div>
-      </div>
-    </Col>
-  ))}
-</Row>
+            {stats.map((stat) => (
+              <Col key={stat.label} md={4} className="mb-3 d-flex">
+                <div className="dashboard-card text-center p-4 shadow-sm rounded bg-white w-100 d-flex flex-column align-items-center justify-content-center">
+                  <div className="dashboard-icon mb-2">{stat.icon}</div>
+                  <div className="dashboard-value mb-1">{stat.value}</div>
+                  <div className="dashboard-label">{stat.label}</div>
+                </div>
+              </Col>
+            ))}
+          </Row>
 
           <Row className="mb-3 align-items-end g-3">
             <Col xs={12} md={2}>
@@ -363,103 +364,103 @@ const Dashboard: React.FC<{ sidebarCollapsed: boolean; toggleSidebar: () => void
             </Col>
           </Row>
           {/* <Row> */}
-            {/* <Col> */}
-              <div className="table-responsive">
-                <div className='dashboard-table-heading'>Registered Patients: {filteredData.patients.length}</div>
-                <table className="table table-striped table-hover align-middle">
-                  <thead className="table-light">
-                    <tr>
-                      <th>Name</th>
-                      <th>Gender</th>
-                      <th>Mobile</th>
-                      <th>Blood Group</th>
-                      <th>DOB</th>
-                      <th>Last Visit</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredData.patients.length > 0 ? (
-                      filteredData.patients.map(p => {
-                        // Find last visit date
-                        const lastVisit = history
-                          .filter(h => h.patientId === p.id)
-                          .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0];
+          {/* <Col> */}
+          <div className="table-responsive">
+            <div className='dashboard-table-heading'>Registered Patients: {filteredData.patients.length}</div>
+            <table className="table table-striped table-hover align-middle">
+              <thead className="table-light">
+                <tr>
+                  <th>Name</th>
+                  <th>Gender</th>
+                  <th>Mobile</th>
+                  <th>Blood Group</th>
+                  <th>DOB</th>
+                  <th>Last Visit</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredData.patients.length > 0 ? (
+                  filteredData.patients.map(p => {
+                    // Find last visit date
+                    const lastVisit = history
+                      .filter(h => h.patientId === p.id)
+                      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0];
 
-                        return (
-                          <tr key={p.id}>
-                            <td>{(p.firstName || p.name) + (p.lastName ? ' ' + p.lastName : '')}</td>
-                            <td>{p.gender}</td>
-                            <td>{p.mobileNo}</td>
-                            <td>{p.bloodGroup}</td>
-                            <td>{p.dateOfBirth}</td>
-                            <td>{lastVisit ? lastVisit.date : 'No visits'}</td>
-                          </tr>
-                        );
-                      })
-                    ) : (
-                      <tr>
-                        <td colSpan={6} className="text-center text-muted">
-                          No patients found matching the current filters
-                        </td>
+                    return (
+                      <tr key={p.id}>
+                        <td>{(p.firstName || p.name) + (p.lastName ? ' ' + p.lastName : '')}</td>
+                        <td>{p.gender}</td>
+                        <td>{p.mobileNo}</td>
+                        <td>{p.bloodGroup}</td>
+                        <td>{p.dateOfBirth}</td>
+                        <td>{lastVisit ? lastVisit.date : 'No visits'}</td>
                       </tr>
-                    )}
-                  </tbody>
-                </table>
-              </div>
-            {/* </Col> */}
+                    );
+                  })
+                ) : (
+                  <tr>
+                    <td colSpan={6} className="text-center text-muted">
+                      No patients found matching the current filters
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+          {/* </Col> */}
           {/* </Row> */}
           {/* <Row> */}
-            {/* <Col> */}
-              <div className="table-responsive">
-                <div className='dashboard-table-heading'>Recent Appointments: {filteredData.appointments.length}</div>
-                <table className="table table-striped table-hover align-middle">
-                  <thead className="table-light">
-                    <tr>
-                      <th></th>
-                      <th>Patient Name</th>
-                      <th>Doctor</th>
-                      <th>Date</th>
-                      <th>Time</th>
-                      <th>Unit</th>
-                      <th>Status</th>
-                      <th>Action</th>
+          {/* <Col> */}
+          <div className="table-responsive">
+            <div className='dashboard-table-heading'>Recent Appointments: {filteredData.appointments.length}</div>
+            <table className="table table-striped table-hover align-middle">
+              <thead className="table-light">
+                <tr>
+                  <th></th>
+                  <th>Patient Name</th>
+                  <th>Doctor</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Unit</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredData.appointments.length > 0 ? (
+                  filteredData.appointments.map(apt => (
+                    <tr key={apt.id}>
+                      <td><Button size="sm" variant="outline-primary">+</Button></td>
+                      <td>{apt.patientName}</td>
+                      <td>{apt.admittingDoctor || 'Dr. Smith'}</td>
+                      <td>{apt.date}</td>
+                      <td>{apt.time}</td>
+                      <td>{apt.dialysisUnit}</td>
+                      <td>
+                        <span className={`badge bg-${apt.status === 'Completed' ? 'success' : apt.status === 'Scheduled' ? 'primary' : 'warning'}`}>
+                          {apt.status}
+                        </span>
+                      </td>
+                      <td>
+                        <Button size="sm" variant="outline-secondary">View</Button>
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {filteredData.appointments.length > 0 ? (
-                      filteredData.appointments.map(apt => (
-                        <tr key={apt.id}>
-                          <td><Button size="sm" variant="outline-primary">+</Button></td>
-                          <td>{apt.patientName}</td>
-                          <td>{apt.admittingDoctor || 'Dr. Smith'}</td>
-                          <td>{apt.date}</td>
-                          <td>{apt.time}</td>
-                          <td>{apt.dialysisUnit}</td>
-                          <td>
-                            <span className={`badge bg-${apt.status === 'Completed' ? 'success' : apt.status === 'Scheduled' ? 'primary' : 'warning'}`}>
-                              {apt.status}
-                            </span>
-                          </td>
-                          <td>
-                            <Button size="sm" variant="outline-secondary">View</Button>
-                          </td>
-                        </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan={8} className="text-center text-muted">
-                          No appointments found matching the current filters
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
-              </div>
-            {/* </Col> */}
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={8} className="text-center text-muted">
+                      No appointments found matching the current filters
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+          {/* </Col> */}
           {/* </Row> */}
         </div>
-              <Footer />
-        </Container>
+        <Footer />
+      </Container>
       {/* </Container> */}
     </>
   );

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { FaSearch, FaBell, FaCog, FaChevronDown } from 'react-icons/fa';
+import { FaSearch, FaBell, FaCog, FaChevronDown, FaBars } from 'react-icons/fa';
 import './TopNav.css';
 
 interface TopNavProps {
@@ -9,17 +9,19 @@ interface TopNavProps {
 }
 
 const TopNav: React.FC<TopNavProps> = ({ searchQuery, setSearchQuery }) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [permanentDropdownOpen, setPermanentDropdownOpen] = useState(false);
+  const [responsiveDropdownOpen, setResponsiveDropdownOpen] = useState(false);
+  const permanentDropdownRef = useRef<HTMLDivElement>(null);
+  const responsiveDropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown when clicking outside
+  // Close permanent dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setDropdownOpen(false);
+      if (permanentDropdownRef.current && !permanentDropdownRef.current.contains(event.target as Node)) {
+        setPermanentDropdownOpen(false);
       }
     }
-    if (dropdownOpen) {
+    if (permanentDropdownOpen) {
       document.addEventListener('mousedown', handleClickOutside);
     } else {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -27,10 +29,29 @@ const TopNav: React.FC<TopNavProps> = ({ searchQuery, setSearchQuery }) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [dropdownOpen]);
+  }, [permanentDropdownOpen]);
 
-  const handleDropdownToggle = () => setDropdownOpen((open) => !open);
-  const handleNavClick = () => setDropdownOpen(false);
+  // Close responsive dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (responsiveDropdownRef.current && !responsiveDropdownRef.current.contains(event.target as Node)) {
+        setResponsiveDropdownOpen(false);
+      }
+    }
+    if (responsiveDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [responsiveDropdownOpen]);
+
+  const handlePermanentDropdownToggle = () => setPermanentDropdownOpen((open) => !open);
+  const handleResponsiveDropdownToggle = () => setResponsiveDropdownOpen((open) => !open);
+  const handlePermanentNavClick = () => setPermanentDropdownOpen(false);
+  const handleResponsiveNavClick = () => setResponsiveDropdownOpen(false);
 
   return (
     <nav className="top-nav">
@@ -49,38 +70,38 @@ const TopNav: React.FC<TopNavProps> = ({ searchQuery, setSearchQuery }) => {
           <li className='nav-link'><NavLink to="/history" className={({ isActive }) => isActive ? 'active' : ''}>History</NavLink></li> */}
         </ul>
 
-        <div className="nav-permanent-more-wrapper" ref={dropdownRef}>
-          <button className="nav-permanent-more-btn" onClick={handleDropdownToggle} aria-expanded={dropdownOpen} aria-controls="nav-more-dropdown">
+        <div className="nav-permanent-more-wrapper" ref={permanentDropdownRef}>
+          <button className="nav-permanent-more-btn" onClick={handlePermanentDropdownToggle} aria-expanded={permanentDropdownOpen} aria-controls="nav-permanent-more-dropdown">
             More <FaChevronDown style={{ marginLeft: 4 }} />
           </button>
-          {dropdownOpen && (
+          {permanentDropdownOpen && (
             <div className="nav-permanent-more-dropdown" id="nav-permanent-more-dropdown">
-              {/* <NavLink to="/dashboard" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Dashboard</NavLink>
-              <NavLink to="/registration" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Patient Registration</NavLink>
-              <NavLink to="/schedule" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Schedule</NavLink>
-              <NavLink to="/process" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Start Dialysis</NavLink> */}
-              <NavLink to="/dialysis-flow-chart" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Flow Chart</NavLink>
-              <NavLink to="/haemodialysis-record-details" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>HD Record</NavLink>
-              <NavLink to="/billing" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Billing</NavLink>
-              <NavLink to="/history" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>History</NavLink>
+              {/* <NavLink to="/dashboard" className={({ isActive }) => isActive ? 'active' : ''} onClick={handlePermanentNavClick}>Dashboard</NavLink>
+              <NavLink to="/registration" className={({ isActive }) => isActive ? 'active' : ''} onClick={handlePermanentNavClick}>Patient Registration</NavLink>
+              <NavLink to="/schedule" className={({ isActive }) => isActive ? 'active' : ''} onClick={handlePermanentNavClick}>Schedule</NavLink>
+              <NavLink to="/process" className={({ isActive }) => isActive ? 'active' : ''} onClick={handlePermanentNavClick}>Start Dialysis</NavLink> */}
+              <NavLink to="/dialysis-flow-chart" className={({ isActive }) => isActive ? 'active' : ''} onClick={handlePermanentNavClick}>Flow Chart</NavLink>
+              <NavLink to="/haemodialysis-record-details" className={({ isActive }) => isActive ? 'active' : ''} onClick={handlePermanentNavClick}>HD Record</NavLink>
+              <NavLink to="/billing" className={({ isActive }) => isActive ? 'active' : ''} onClick={handlePermanentNavClick}>Billing</NavLink>
+              <NavLink to="/history" className={({ isActive }) => isActive ? 'active' : ''} onClick={handlePermanentNavClick}>History</NavLink>
             </div>
           )}
         </div>
 
-        <div className="nav-more-wrapper" ref={dropdownRef}>
-          <button className="nav-more-btn" onClick={handleDropdownToggle} aria-expanded={dropdownOpen} aria-controls="nav-more-dropdown">
-            More <FaChevronDown style={{ marginLeft: 4 }} />
+        <div className="nav-more-wrapper" ref={responsiveDropdownRef}>
+          <button className="nav-more-btn" onClick={handleResponsiveDropdownToggle} aria-expanded={responsiveDropdownOpen} aria-controls="nav-more-dropdown">
+          <FaBars /> <FaChevronDown style={{ marginLeft: 4}} />
           </button>
-          {dropdownOpen && (
+          {responsiveDropdownOpen && (
             <div className="nav-more-dropdown" id="nav-more-dropdown">
-              <NavLink to="/dashboard" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Dashboard</NavLink>
-              <NavLink to="/registration" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Patient Registration</NavLink>
-              <NavLink to="/schedule" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Schedule</NavLink>
-              <NavLink to="/process" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Start Dialysis</NavLink>
-              <NavLink to="/dialysis-flow-chart" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Flow Chart</NavLink>
-              <NavLink to="/haemodialysis-record-details" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>HD Record</NavLink>
-              <NavLink to="/billing" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>Billing</NavLink>
-              <NavLink to="/history" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleNavClick}>History</NavLink>
+              <NavLink to="/dashboard" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleResponsiveNavClick}>Dashboard</NavLink>
+              <NavLink to="/registration" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleResponsiveNavClick}>Patient Registration</NavLink>
+              <NavLink to="/schedule" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleResponsiveNavClick}>Schedule</NavLink>
+              <NavLink to="/process" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleResponsiveNavClick}>Start Dialysis</NavLink>
+              <NavLink to="/dialysis-flow-chart" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleResponsiveNavClick}>Flow Chart</NavLink>
+              <NavLink to="/haemodialysis-record-details" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleResponsiveNavClick}>HD Record</NavLink>
+              <NavLink to="/billing" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleResponsiveNavClick}>Billing</NavLink>
+              <NavLink to="/history" className={({ isActive }) => isActive ? 'active' : ''} onClick={handleResponsiveNavClick}>History</NavLink>
             </div>
           )}
         </div>
